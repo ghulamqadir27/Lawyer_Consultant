@@ -1524,6 +1524,7 @@ class _AudioCallAppointmentSlotsWidgetState
                   width: double.infinity,
                   child: ButtonWidgetOne(
                     onTap: () {
+                      log('Save button tapped for single day audio call');
                       if (selectedDay.isNotEmpty &&
                           forSingleDayStartTime != null &&
                           forSingleDayEndTime != null) {
@@ -1531,24 +1532,23 @@ class _AudioCallAppointmentSlotsWidgetState
                             context,
                             generateAppointmentScheduleSlotsForSingleDayUrl,
                             {
-                              "appointment_type_id": 2,
-                              "day": selectedDay,
-                              "start_time":
+                              'appointment_type_id': 2,
+                              'day': selectedDay,
+                              'start_time':
                                   forSingleDayStartTime!.format(context),
-                              "end_time": forSingleDayEndTime!.format(context),
-                              "fee": Get.find<GenerateScheduleSlotsController>()
-                                  .forSingleDayAudioCallFeeController
-                                  .text,
-                              "interval":
+                              'end_time': forSingleDayEndTime!.format(context),
+                              'fee': totalFeeForSingleDay,
+                              'interval':
                                   Get.find<GenerateScheduleSlotsController>()
                                       .forSingleDayAudioCallIntervalController
                                       .text,
-                              "generated_slots": singleDayGeneratedSlots,
+                              'generated_slots': singleDayGeneratedSlots,
                             },
                             true,
                             generateAppointmentScheduleSlotsForSingleDayRepo);
                         Get.offNamed(PageRoutes.scheduleAppSlots);
                       } else {
+                        log('Save button validation failed: Not all fields are filled.');
                         ScaffoldMessenger.of(context).showSnackBar(
                             Get.find<GeneralController>().showSnackBar(
                                 LanguageConstant
@@ -1567,6 +1567,7 @@ class _AudioCallAppointmentSlotsWidgetState
                   width: double.infinity,
                   child: ButtonWidgetOne(
                     onTap: () {
+                      log('Reset button tapped for single day audio call');
                       setState(() {
                         isSingleDayOn = false;
                       });

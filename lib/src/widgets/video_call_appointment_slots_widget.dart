@@ -1502,6 +1502,7 @@ class _VideoCallAppointmentSlotsWidgetState
                   width: double.infinity,
                   child: ButtonWidgetOne(
                     onTap: () {
+                      log('Save button tapped for single day video call');
                       if (selectedDay.isNotEmpty &&
                           forSingleDayStartTime != null &&
                           forSingleDayEndTime != null) {
@@ -1509,17 +1510,17 @@ class _VideoCallAppointmentSlotsWidgetState
                             context,
                             generateAppointmentScheduleSlotsForSingleDayUrl,
                             {
-                              "appointment_type_id": 1,
-                              "day": selectedDay,
-                              "start_time":
+                              'appointment_type_id': 1,
+                              'day': selectedDay,
+                              'start_time':
                                   forSingleDayStartTime!.format(context),
-                              "end_time": forSingleDayEndTime!.format(context),
-                              "fee": totalFeeForSingleDay,
-                              "interval":
+                              'end_time': forSingleDayEndTime!.format(context),
+                              'fee': totalFeeForSingleDay,
+                              'interval':
                                   Get.find<GenerateScheduleSlotsController>()
                                       .forSingleDayVideoCallIntervalController
                                       .text,
-                              "generated_slots": singleDayGeneratedSlots,
+                              'generated_slots': singleDayGeneratedSlots,
                             },
                             true,
                             generateAppointmentScheduleSlotsForSingleDayRepo);
@@ -1543,6 +1544,7 @@ class _VideoCallAppointmentSlotsWidgetState
                   width: double.infinity,
                   child: ButtonWidgetOne(
                     onTap: () {
+                      log('Reset button tapped for single day video call');
                       setState(() {
                         isSingleDayOn = false;
                       });
