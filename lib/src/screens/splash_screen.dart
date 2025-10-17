@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../config/app_colors.dart';
-import '../config/app_font.dart';
 import '../controllers/general_controller.dart';
 import '../controllers/lawyer_appointment_history_controller.dart';
 
@@ -29,7 +27,7 @@ class SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  startTime() async {
+  Future<Timer> startTime() async {
     var duration = const Duration(seconds: 5);
 
     return Timer(duration, checkFirstSeenAndNavigate);

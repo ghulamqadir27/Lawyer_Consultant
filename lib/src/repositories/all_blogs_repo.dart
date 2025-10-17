@@ -6,7 +6,7 @@ import '../controllers/all_blogs_controller.dart';
 import '../controllers/general_controller.dart';
 import '../models/all_blog_posts_model.dart';
 
-getAllBlogsPostsRepo(
+void getAllBlogsPostsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<AllBlogsController>().getAllBlogPostsModel =

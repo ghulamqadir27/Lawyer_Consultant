@@ -7,7 +7,7 @@ import 'package:lawyer_consultant_for_lawyers/src/models/get_wallet_transactions
 
 import '../controllers/general_controller.dart';
 
-getWalletTransactionsRepo(
+void getWalletTransactionsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<WalletController>()

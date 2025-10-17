@@ -32,7 +32,7 @@ import 'appbar_widget.dart';
 import 'commission_type_widget.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
-  BottomNavigationWidget({super.key});
+  const BottomNavigationWidget({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

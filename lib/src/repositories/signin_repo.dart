@@ -11,7 +11,7 @@ import '../models/signin_user_model.dart';
 import '../routes.dart';
 import '../widgets/custom_dialog.dart';
 
-signInWithEmailRepo(
+void signInWithEmailRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<SigninController>().signInUserModel =
@@ -83,7 +83,7 @@ signInWithEmailRepo(
   }
 }
 
-socialSignInWithEmailRepo(
+void socialSignInWithEmailRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<SigninController>().signInUserModel =

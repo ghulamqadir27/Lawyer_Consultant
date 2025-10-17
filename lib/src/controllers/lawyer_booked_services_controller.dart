@@ -11,7 +11,7 @@ class LawyerBookedServicesController extends GetxController {
       GetLawyerBookedServicesModel();
 
   bool allLawyerBookedServicesLoader = false;
-  updateLawyerBookedServicesLoader(bool newValue) {
+  void updateLawyerBookedServicesLoader(bool newValue) {
     allLawyerBookedServicesLoader = newValue;
     update();
   }
@@ -23,13 +23,13 @@ class LawyerBookedServicesController extends GetxController {
 
   ///------------------------------- Lawyers-data-check
   bool getLawyerBookedServiceDataCheck = false;
-  getLawyerBookedServicesDataCheck(bool value) {
+  void getLawyerBookedServicesDataCheck(bool value) {
     getLawyerBookedServiceDataCheck = value;
     update();
   }
 
   int? selectedLawyerCategoryIndex = 0;
-  updateSelectedLawyerCategoryIndex(int? newValue) {
+  void updateSelectedLawyerCategoryIndex(int? newValue) {
     selectedLawyerCategoryIndex = newValue;
     update();
   }
@@ -49,7 +49,7 @@ class LawyerBookedServicesController extends GetxController {
     }
   }
 
-  updateLawyerListForPagination(
+  void updateLawyerListForPagination(
       LawyerBookedServiceModel lawyerBookedServiceModel) {
     lawyerAllBookedServicesListForPagination.add(lawyerBookedServiceModel);
     update();

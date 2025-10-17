@@ -12,7 +12,7 @@ class AllBlogsController extends GetxController {
   GetAllBlogPostsModel getAllBlogPostsModel = GetAllBlogPostsModel();
 
   bool allBlogsPostsLoader = false;
-  updateBlogsPostsLoader(bool newValue) {
+  void updateBlogsPostsLoader(bool newValue) {
     allBlogsPostsLoader = newValue;
     update();
   }
@@ -24,7 +24,7 @@ class AllBlogsController extends GetxController {
 
   List<BlogModel> blogsPostsListForPagination = [];
 
-  updateSelectedBlogsPostsForView(
+  void updateSelectedBlogsPostsForView(
     BlogModel newValue,
   ) {
     selectedBlogsPostsForView = newValue;
@@ -34,7 +34,7 @@ class AllBlogsController extends GetxController {
 
   ///------------------------------- Blog-Posts-data-check
   bool getBlogsPostsDataCheck = false;
-  getBlogsPostsDataCheckCheck(bool value) {
+  void getBlogsPostsDataCheckCheck(bool value) {
     getBlogsPostsDataCheck = value;
     update();
   }
@@ -69,7 +69,7 @@ class AllBlogsController extends GetxController {
     }
   }
 
-  updateBlogsPostsListForPagination(BlogModel blogsPostsModel) {
+  void updateBlogsPostsListForPagination(BlogModel blogsPostsModel) {
     blogsPostsListForPagination.add(blogsPostsModel);
     update();
   }

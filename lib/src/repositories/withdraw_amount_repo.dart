@@ -11,7 +11,7 @@ import '../controllers/general_controller.dart';
 import '../widgets/button_widget.dart';
 import 'get_wallet_withdrawals_repo.dart';
 
-withdrawAmountRepo(
+void withdrawAmountRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     showDialog(

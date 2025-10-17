@@ -25,7 +25,7 @@ import 'select_week_days_widget.dart';
 import 'text_form_field_widget.dart';
 
 class VideoCallAppointmentSlotsWidget extends StatefulWidget {
-  VideoCallAppointmentSlotsWidget({super.key});
+  const VideoCallAppointmentSlotsWidget({super.key});
 
   @override
   State<VideoCallAppointmentSlotsWidget> createState() =>
@@ -180,56 +180,48 @@ class _VideoCallAppointmentSlotsWidgetState
   }
 
   Map<String, List<Map<String, dynamic>>> forSingleDayGenerateTimeSlot() {
-    if (singleDayGeneratedSlots.containsKey('key')) {}
-    for (String day in selectedDays) {
-      singleDayGeneratedSlots[day] = [];
+    setState(() {
+      isGenerating = true;
+    });
 
-      TimeOfDay currentStartTime = forSingleDayStartTime!;
+    singleDayGeneratedSlots[selectedDay] = [];
 
-      while (currentStartTime.hour < forSingleDayEndTime!.hour ||
-          (currentStartTime.hour == forSingleDayEndTime!.hour &&
-              currentStartTime.minute + intervalMinutes! <=
-                  forSingleDayEndTime!.minute)) {
-        log("Running");
-        setState(() {
-          currentStartTime != forSingleDayEndTime
-              ? isGenerating = true
-              : isGenerating = false;
-        });
+    TimeOfDay currentStartTime = forSingleDayStartTime!;
 
-        int addHour = currentStartTime.hour * 60 +
-            currentStartTime.minute +
-            intervalMinutes!;
-        var currentEndTime = currentStartTime.replacing(
-          hour: addHour ~/ 60,
-          minute: (currentStartTime.minute + intervalMinutes!) % 60,
-        );
+    while (currentStartTime.hour < forSingleDayEndTime!.hour ||
+        (currentStartTime.hour == forSingleDayEndTime!.hour &&
+            currentStartTime.minute < forSingleDayEndTime!.minute)) {
+      int addHour = currentStartTime.hour * 60 +
+          currentStartTime.minute +
+          intervalMinutes!;
+      var currentEndTime = currentStartTime.replacing(
+        hour: addHour ~/ 60,
+        minute: addHour % 60,
+      );
 
-        if (currentEndTime.hour > forSingleDayEndTime!.hour ||
-            (currentEndTime.hour == forSingleDayEndTime!.hour &&
-                currentEndTime.minute > forSingleDayEndTime!.minute)) {
-          // Adjust the end time to be equal to or less than the end time provided.
-          currentEndTime = forSingleDayEndTime!;
-        }
+      if (currentEndTime.hour > forSingleDayEndTime!.hour ||
+          (currentEndTime.hour == forSingleDayEndTime!.hour &&
+              currentEndTime.minute > forSingleDayEndTime!.minute)) {
+        currentEndTime = forSingleDayEndTime!;
+      }
 
-        singleDayGeneratedSlots[day]!.add({
+      // Only add slot if start time is before end time
+      if (currentStartTime.hour < currentEndTime.hour ||
+          (currentStartTime.hour == currentEndTime.hour &&
+              currentStartTime.minute < currentEndTime.minute)) {
+        singleDayGeneratedSlots[selectedDay]!.add({
           'start_time': currentStartTime.format(context),
           'end_time': currentEndTime.format(context),
           'is_active': true,
         });
-        log("${currentStartTime.format(context)} CurrentStartTime");
-        log("${currentEndTime.format(context)} CurrentEndTime");
-
-        currentStartTime = currentEndTime;
-
-        setState(() {
-          currentStartTime == currentEndTime
-              ? isGenerating = false
-              : isGenerating = true;
-        });
       }
+
+      currentStartTime = currentEndTime;
     }
 
+    setState(() {
+      isGenerating = false;
+    });
     return singleDayGeneratedSlots;
   }
 
@@ -774,11 +766,10 @@ class _VideoCallAppointmentSlotsWidgetState
                                         SizedBox(height: 14.h),
                                         ButtonWidgetOne(
                                           onTap: () {
-                                            final generalController =
-                                                Get.find<GeneralController>();
                                             if (selectedDays.isEmpty) {
                                               ScaffoldMessenger.of(context)
-                                                  .showSnackBar(generalController
+                                                  .showSnackBar(Get.find<
+                                                          GeneralController>()
                                                       .showSnackBar(
                                                           LanguageConstant
                                                               .pleaseSelectDay
@@ -786,7 +777,8 @@ class _VideoCallAppointmentSlotsWidgetState
                                             } else if (startTime == null ||
                                                 endTime == null) {
                                               ScaffoldMessenger.of(context)
-                                                  .showSnackBar(generalController
+                                                  .showSnackBar(Get.find<
+                                                          GeneralController>()
                                                       .showSnackBar(LanguageConstant
                                                           .pleaseSelectDayStartTimeandEndTime
                                                           .tr));
@@ -795,7 +787,8 @@ class _VideoCallAppointmentSlotsWidgetState
                                                 .text
                                                 .isEmpty) {
                                               ScaffoldMessenger.of(context)
-                                                  .showSnackBar(generalController
+                                                  .showSnackBar(Get.find<
+                                                          GeneralController>()
                                                       .showSnackBar(
                                                           LanguageConstant
                                                               .intervalIsRequired
@@ -1380,10 +1373,19 @@ class _VideoCallAppointmentSlotsWidgetState
           padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 24.h),
           child: ButtonWidgetOne(
             onTap: () {
-              if (selectedDay.isEmpty) {
+              final generalController = Get.find<GeneralController>();
+              if (forSingleDayStartTime == null ||
+                  forSingleDayEndTime == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    Get.find<GeneralController>()
-                        .showSnackBar(LanguageConstant.pleaseSelectDay.tr));
+                    generalController.showSnackBar(LanguageConstant
+                        .pleaseSelectDayStartTimeandEndTime.tr));
+              } else if (intervalMinutes == null ||
+                  Get.find<GenerateScheduleSlotsController>()
+                      .forSingleDayVideoCallIntervalController
+                      .text
+                      .isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(generalController
+                    .showSnackBar(LanguageConstant.intervalIsRequired.tr));
               } else {
                 forSingleDayGenerateSlots();
               }
@@ -1397,12 +1399,15 @@ class _VideoCallAppointmentSlotsWidgetState
             ? Wrap(
                 children: [
                   ListView.builder(
-                      itemCount: singleDayGeneratedSlots.length,
+                      itemCount:
+                          singleDayGeneratedSlots.containsKey(selectedDay)
+                              ? 1
+                              : 0,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        final day = weekDays.elementAt(index);
-                        final slots = singleDayGeneratedSlots[day];
+                        final day = selectedDay;
+                        final slots = singleDayGeneratedSlots[selectedDay];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

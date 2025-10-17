@@ -98,6 +98,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  @override
   void initState() {
     super.initState();
     // Get All Settings

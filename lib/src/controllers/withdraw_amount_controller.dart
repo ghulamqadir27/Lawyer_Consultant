@@ -9,7 +9,7 @@ class WithdrawAmountController extends GetxController {
   TextEditingController additionalNotesController = TextEditingController();
 
   bool withdrawAmountLoader = false;
-  updateWithdrawAmountLoader(bool newValue) {
+  void updateWithdrawAmountLoader(bool newValue) {
     withdrawAmountLoader = newValue;
     update();
   }

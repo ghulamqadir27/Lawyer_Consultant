@@ -7,7 +7,7 @@ import '../controllers/edit_profile_controller.dart';
 import '../controllers/general_controller.dart';
 import '../models/get_lawyer_profile_service_model.dart';
 
-getLawyerServicesRepo(
+void getLawyerServicesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<EditProfileController>()

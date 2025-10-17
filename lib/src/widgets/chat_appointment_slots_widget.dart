@@ -23,7 +23,7 @@ import 'button_widget.dart';
 import 'text_form_field_widget.dart';
 
 class ChatAppointmentSlotsWidget extends StatefulWidget {
-  ChatAppointmentSlotsWidget({super.key});
+  const ChatAppointmentSlotsWidget({super.key});
 
   @override
   State<ChatAppointmentSlotsWidget> createState() =>

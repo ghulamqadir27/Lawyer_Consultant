@@ -16,7 +16,7 @@ import '../widgets/auth_text_form_field_widget.dart';
 import '../widgets/button_widget.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  ForgotPasswordScreen({super.key});
+  const ForgotPasswordScreen({super.key});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
@@ -104,7 +104,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         SizedBox(height: 30.h),
                         ButtonWidgetOne(
                           borderRadius: 10,
-                         
                           buttonText: LanguageConstant.submit.tr,
                           buttonTextStyle: AppTextStyles.buttonTextStyle1,
                           onTap: () {

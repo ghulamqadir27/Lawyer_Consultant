@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 GetSignInUserModel getSignInUserModelFromJson(String str) =>
     GetSignInUserModel.fromJson(json.decode(str));

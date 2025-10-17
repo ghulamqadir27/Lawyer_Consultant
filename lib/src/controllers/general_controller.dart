@@ -10,42 +10,40 @@ import 'package:lawyer_consultant_for_lawyers/src/models/response_model.dart';
 import 'package:resize/resize.dart';
 
 import '../config/app_colors.dart';
-import '../config/app_text_styles.dart';
 import '../models/lawyer_booked_services_model.dart';
 import '../models/lawyer_appointment_history_model.dart';
 import '../models/logged_in_lawyer_model.dart';
 import '../routes.dart';
 import '../screens/agora_call/get_agora_token_model.dart';
 import '../widgets/custom_dialog.dart';
-import 'all_settings_controller.dart';
 
 class GeneralController extends GetxController {
   GetStorage storageBox = GetStorage();
 
   bool formLoaderController = false;
 
-  updateFormLoaderController(bool newValue) {
+  void updateFormLoaderController(bool newValue) {
     formLoaderController = newValue;
     update();
   }
 
   bool callLoaderController = false;
 
-  updateCallLoaderController(bool newValue) {
+  void updateCallLoaderController(bool newValue) {
     callLoaderController = newValue;
     update();
   }
 
   bool appointmentStatusLoaderController = false;
 
-  updateAppointmentStatusLoaderController(bool newValue) {
+  void updateAppointmentStatusLoaderController(bool newValue) {
     appointmentStatusLoaderController = newValue;
     update();
   }
 
   bool bookedServiceStatusLoaderController = false;
 
-  updateBookedServiceStatusLoaderController(bool newValue) {
+  void updateBookedServiceStatusLoaderController(bool newValue) {
     bookedServiceStatusLoaderController = newValue;
     update();
   }
@@ -53,7 +51,7 @@ class GeneralController extends GetxController {
   ///---appbar-open
   String? appBarSelectedCountryCode = '+92';
 
-  updateAppBarSelectedCountryCode(String? newValue) {
+  void updateAppBarSelectedCountryCode(String? newValue) {
     appBarSelectedCountryCode = newValue;
     update();
   }
@@ -61,7 +59,7 @@ class GeneralController extends GetxController {
   ///---appbar-close
 
   ///--focus-out
-  focusOut(BuildContext context) {
+  void focusOut(BuildContext context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
@@ -84,7 +82,7 @@ class GeneralController extends GetxController {
 
   int callerType = 2;
 
-  updateCallerType(int i) {
+  void updateCallerType(int i) {
     callerType = i;
     update();
   }
@@ -113,7 +111,7 @@ class GeneralController extends GetxController {
   GetAgoraTokenModel getAgoraTokenModel = GetAgoraTokenModel();
   bool? goForCall = true;
 
-  updateGoForCall(bool? newValue) {
+  void updateGoForCall(bool? newValue) {
     goForCall = newValue;
     update();
   }
@@ -121,26 +119,26 @@ class GeneralController extends GetxController {
   String? channelForCall;
   String? tokenForCall;
 
-  updateTokenForCall(String? newValueToken) {
+  void updateTokenForCall(String? newValueToken) {
     tokenForCall = newValueToken;
     update();
   }
 
-  updateChannelForCall(String? newValueChannel) {
+  void updateChannelForCall(String? newValueChannel) {
     channelForCall = newValueChannel;
     update();
   }
 
   int? userIdForSendNotification;
 
-  updateUserIdForSendNotification(int? newValue) {
+  void updateUserIdForSendNotification(int? newValue) {
     userIdForSendNotification = newValue;
     update();
   }
 
   int? appointmentIdForSendNotification;
 
-  updateAppointmentIdForSendNotification(int? newValue) {
+  void updateAppointmentIdForSendNotification(int? newValue) {
     appointmentIdForSendNotification = newValue;
     update();
   }
@@ -160,8 +158,8 @@ class GeneralController extends GetxController {
   String? notificationRouteWeb;
   String? sound;
 
-  updateNotificationBody(String? newTitle, String? newBody, String? newRouteApp,
-      String? newRouteWeb, String? newSound) {
+  void updateNotificationBody(String? newTitle, String? newBody,
+      String? newRouteApp, String? newRouteWeb, String? newSound) {
     notificationTitle = newTitle;
     notificationBody = newBody;
     notificationRouteApp = newRouteApp;
@@ -174,12 +172,12 @@ class GeneralController extends GetxController {
 
   Language? selectedLocale;
 
-  updateSelectedLocale(Language? newValue) {
+  void updateSelectedLocale(Language? newValue) {
     selectedLocale = newValue;
     update();
   }
 
-  checkLanguage() {
+  void checkLanguage() {
     if (storageBox.hasData('languageIndex')) {
       updateSelectedLocale(
           localeList[int.parse(storageBox.read('languageIndex').toString())]);
@@ -193,7 +191,7 @@ class GeneralController extends GetxController {
   ///------------------------------- pagination-check
   bool getPaginationProgressCheck = false;
 
-  changeGetPaginationProgressCheck(bool value) {
+  void changeGetPaginationProgressCheck(bool value) {
     getPaginationProgressCheck = value;
     update();
   }
@@ -201,7 +199,7 @@ class GeneralController extends GetxController {
   //-----------------------------selected Appointment History for detail view
   LawyerAppointmentHistoryModel selectedAppointmentHistoryForView =
       LawyerAppointmentHistoryModel();
-  updateSelectedAppointmentHistoryForView(
+  void updateSelectedAppointmentHistoryForView(
     LawyerAppointmentHistoryModel newValue,
   ) {
     selectedAppointmentHistoryForView = newValue;
@@ -211,7 +209,7 @@ class GeneralController extends GetxController {
   //-----------------------------selected Booked Service for detail view
   LawyerBookedServiceModel selectedBookedServiceForView =
       LawyerBookedServiceModel();
-  updateSelectedBookedServicesForView(
+  void updateSelectedBookedServicesForView(
     LawyerBookedServiceModel newValue,
   ) {
     selectedBookedServiceForView = newValue;
@@ -221,7 +219,7 @@ class GeneralController extends GetxController {
   ///-------------------------------server-check
   bool serverErrorCheck = true;
 
-  changeServerErrorCheck(bool value) {
+  void changeServerErrorCheck(bool value) {
     serverErrorCheck = value;
     update();
   }
@@ -229,12 +227,12 @@ class GeneralController extends GetxController {
   ///------------------------------- loader-check
   bool loaderCheck = false;
 
-  changeLoaderCheck(bool value) {
+  void changeLoaderCheck(bool value) {
     loaderCheck = value;
     update();
   }
 
-  showSnackBar(String content) {
+  SnackBar showSnackBar(String content) {
     return SnackBar(
       content: Text(
         content,
@@ -260,7 +258,7 @@ class GeneralController extends GetxController {
   // ignore: prefer_typing_uninitialized_variables
   // var signInUserToken;
 
-  showMessageDialog(BuildContext context) {
+  Future showMessageDialog(BuildContext context) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -279,7 +277,7 @@ class GeneralController extends GetxController {
     );
   }
 
-  customDropDownDialogForLocale(BuildContext context) {
+  Future customDropDownDialogForLocale(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {

@@ -8,7 +8,7 @@ import '../config/app_colors.dart';
 import '../controllers/appoinment_schedules_controller.dart';
 import '../controllers/general_controller.dart';
 
-deleteAppointmentScheduleRepo(
+void deleteAppointmentScheduleRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {

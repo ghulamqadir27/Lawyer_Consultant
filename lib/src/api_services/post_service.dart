@@ -13,7 +13,7 @@ import '../controllers/general_controller.dart';
 import '../repositories/main_repo/main_logic.dart';
 import '../widgets/custom_dialog.dart';
 
-postMethod(
+Future<void> postMethod(
     BuildContext context,
     String apiUrl,
     dynamic postData,
@@ -60,7 +60,7 @@ postMethod(
         }
         // log('response   ....  $response');
         // executionMethod(context, false, {'status': null});
-      } on dio_instance.DioError catch (e) {
+      } on dio_instance.DioException catch (e) {
         log('Dio Error  ....  ${e.response}');
         executionMethod(context, false, e.response!.data);
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/generate_schedule_slots_controller.dart';
 
-generateAppointmentScheduleSlotsRepo(
+void generateAppointmentScheduleSlotsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GenerateScheduleSlotsController>()
@@ -19,7 +19,7 @@ generateAppointmentScheduleSlotsRepo(
   }
 }
 
-generateAppointmentScheduleSlotsForSingleDayRepo(
+void generateAppointmentScheduleSlotsForSingleDayRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GenerateScheduleSlotsController>()

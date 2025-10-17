@@ -25,7 +25,7 @@ import 'select_week_days_widget.dart';
 import 'text_form_field_widget.dart';
 
 class AudioCallAppointmentSlotsWidget extends StatefulWidget {
-  AudioCallAppointmentSlotsWidget({super.key});
+  const AudioCallAppointmentSlotsWidget({super.key});
 
   @override
   State<AudioCallAppointmentSlotsWidget> createState() =>
@@ -120,12 +120,32 @@ class _AudioCallAppointmentSlotsWidgetState
   }
 
   void generateSlots() {
+    if (startTime == null || endTime == null || intervalMinutes == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        Get.find<GeneralController>().showSnackBar(
+          LanguageConstant.pleaseSelectDayStartTimeandEndTime.tr,
+        ),
+      );
+      return;
+    }
+
     generatedSlots = generateTimeSlot();
 
     print("$generatedSlots TESTING");
   }
 
   void forSingleDayGenerateSlots() {
+    if (forSingleDayStartTime == null ||
+        forSingleDayEndTime == null ||
+        intervalMinutes == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        Get.find<GeneralController>().showSnackBar(
+          LanguageConstant.pleaseSelectDayStartTimeandEndTime.tr,
+        ),
+      );
+      return;
+    }
+
     singleDayGeneratedSlots = forSingleDayGenerateTimeSlot();
 
     print("$singleDayGeneratedSlots TESTING");
@@ -259,7 +279,7 @@ class _AudioCallAppointmentSlotsWidgetState
                           .toJson();
 
                       var savedSlots = {};
-                      log("${response} VALUE1");
+                      log("$response VALUE1");
                       response.forEach((day, value) {
                         log("${day.toString()} DAY");
                         log("${value["schedule_slots"]} VALUE");
@@ -417,10 +437,10 @@ class _AudioCallAppointmentSlotsWidgetState
 
                                                             // <== Callback to handle the selected days
                                                             print(values);
-                                                            log("${selectedDays} ONSelect1");
+                                                            log("$selectedDays ONSelect1");
 
                                                             print(
-                                                                "${selectedDays} OnSelectedDays");
+                                                                "$selectedDays OnSelectedDays");
                                                           }
                                                         : (values) {
                                                             if (selectedDays
@@ -435,7 +455,7 @@ class _AudioCallAppointmentSlotsWidgetState
 
                                                             // <== Callback to handle the selected days
                                                             print(values);
-                                                            log("${selectedDays} ONSelect2");
+                                                            log("$selectedDays ONSelect2");
                                                           },
                                               );
                                             },
@@ -774,7 +794,7 @@ class _AudioCallAppointmentSlotsWidgetState
                                                           LanguageConstant
                                                               .pleaseSelectDay
                                                               .tr));
-                                            } else if (startTime == null ||
+                                            } else if (startTime == null || //
                                                 endTime == null) {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(Get.find<
@@ -1375,10 +1395,19 @@ class _AudioCallAppointmentSlotsWidgetState
           padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 24.h),
           child: ButtonWidgetOne(
             onTap: () {
-              if (selectedDay.isEmpty) {
+              final generalController = Get.find<GeneralController>();
+              if (forSingleDayStartTime == null ||
+                  forSingleDayEndTime == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    Get.find<GeneralController>()
-                        .showSnackBar(LanguageConstant.pleaseSelectDay.tr));
+                    generalController.showSnackBar(LanguageConstant
+                        .pleaseSelectDayStartTimeandEndTime.tr));
+              } else if (intervalMinutes == null ||
+                  Get.find<GenerateScheduleSlotsController>()
+                      .forSingleDayAudioCallIntervalController
+                      .text
+                      .isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(generalController
+                    .showSnackBar(LanguageConstant.intervalIsRequired.tr));
               } else {
                 forSingleDayGenerateSlots();
               }
@@ -1392,12 +1421,15 @@ class _AudioCallAppointmentSlotsWidgetState
             ? Wrap(
                 children: [
                   ListView.builder(
-                      itemCount: singleDayGeneratedSlots.length,
+                      itemCount:
+                          singleDayGeneratedSlots.containsKey(selectedDay)
+                              ? 1
+                              : 0,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        final day = weekDays.elementAt(index);
-                        final slots = singleDayGeneratedSlots[day];
+                        final day = selectedDay;
+                        final slots = singleDayGeneratedSlots[selectedDay];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

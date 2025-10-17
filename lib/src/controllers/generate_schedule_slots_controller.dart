@@ -23,7 +23,7 @@ class GenerateScheduleSlotsController extends GetxController {
       TextEditingController();
 
   bool generateScheduleSlotsLoader = false;
-  updateGenerateScheduleSlotsLoader(bool newValue) {
+  void updateGenerateScheduleSlotsLoader(bool newValue) {
     generateScheduleSlotsLoader = newValue;
     update();
   }

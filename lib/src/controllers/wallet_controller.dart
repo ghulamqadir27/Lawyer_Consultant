@@ -27,45 +27,45 @@ class WalletController extends GetxController {
   List<WalletTransactionModel> walletTransactionForPagination = [];
 
   bool allWalletWithdrawalLoader = false;
-  updateWalletWithdrawalLoader(bool newValue) {
+  void updateWalletWithdrawalLoader(bool newValue) {
     allWalletWithdrawalLoader = newValue;
     update();
   }
 
   bool allWalletTransactionLoader = false;
-  updateWalletTransactionLoader(bool newValue) {
+  void updateWalletTransactionLoader(bool newValue) {
     allWalletTransactionLoader = newValue;
     update();
   }
 
   bool allWalletBalanceLoader = false;
-  updateWalletBalanceLoader(bool newValue) {
+  void updateWalletBalanceLoader(bool newValue) {
     allWalletBalanceLoader = newValue;
     update();
   }
 
   ///------------------------------- Wallet-Withdrawal-data-check
   bool getWalletWithdrawalCheck = false;
-  getWalletWithdrawalDataCheck(bool value) {
+  void getWalletWithdrawalDataCheck(bool value) {
     getWalletWithdrawalCheck = value;
     update();
   }
 
   ///------------------------------- Wallet-Transaction-data-check
   bool getWalletTransactionCheck = false;
-  getWalletTransactionDataCheck(bool value) {
+  void getWalletTransactionDataCheck(bool value) {
     getWalletTransactionCheck = value;
     update();
   }
 
   int? selectedWalletWithdrawalIndex = 0;
-  updateSelectedWalletWithdrawalIndex(int? newValue) {
+  void updateSelectedWalletWithdrawalIndex(int? newValue) {
     selectedWalletWithdrawalIndex = newValue;
     update();
   }
 
   int? selectedWalletTransactionIndex = 0;
-  updateSelectedWalletTransactionIndex(int? newValue) {
+  void updateSelectedWalletTransactionIndex(int? newValue) {
     selectedWalletTransactionIndex = newValue;
     update();
   }
@@ -100,13 +100,13 @@ class WalletController extends GetxController {
     }
   }
 
-  updateWalletWithdrawalsForPagination(
+  void updateWalletWithdrawalsForPagination(
       WalletWithdrawalModel walletWithdrawalsModel) {
     walletWithdrawalForPagination.add(walletWithdrawalsModel);
     update();
   }
 
-  updateWalletTransactionsForPagination(
+  void updateWalletTransactionsForPagination(
       WalletTransactionModel walletTransactionModel) {
     walletTransactionForPagination.add(walletTransactionModel);
     update();
@@ -115,7 +115,7 @@ class WalletController extends GetxController {
   ///------------------------------- user-profile-data-check
   bool getUserProfileDataCheck = false;
 
-  changeGetUserProfileDataCheck(bool value) {
+  void changeGetUserProfileDataCheck(bool value) {
     getUserProfileDataCheck = value;
     update();
   }

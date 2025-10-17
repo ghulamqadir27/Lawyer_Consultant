@@ -5,7 +5,7 @@ import 'package:lawyer_consultant_for_lawyers/src/controllers/contact_us_control
 import '../config/app_colors.dart';
 import '../widgets/custom_dialog.dart';
 
-contactUsRepo(
+void contactUsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<ContactUsController>().updateContactUsLoader(true);

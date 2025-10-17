@@ -18,7 +18,7 @@ import 'agora.config.dart' as config;
 
 /// MultiChannel Example
 class JoinChannelVideo extends StatefulWidget {
-  JoinChannelVideo({Key? key}) : super(key: key);
+  const JoinChannelVideo({super.key});
 
   @override
   State<StatefulWidget> createState() => _State();
@@ -31,7 +31,7 @@ class _State extends State<JoinChannelVideo> {
   // List<int> remoteUid = [];
   int? remoteUid;
   bool localUserJoined = false;
-  _callEndCheckMethod() {
+  void _callEndCheckMethod() {
     if (callEnd == 2) {
       _leaveChannel();
       Get.back();
@@ -89,7 +89,7 @@ class _State extends State<JoinChannelVideo> {
 
   int? callEnd = 0;
 
-  _initEngine() async {
+  Future<void> _initEngine() async {
     _engine = createAgoraRtcEngine();
     await _engine.initialize(RtcEngineContext(appId: config.agoraAppId));
     _addListeners();
@@ -100,7 +100,7 @@ class _State extends State<JoinChannelVideo> {
     await _engine.setVideoEncoderConfiguration(configuration);
   }
 
-  _addListeners() {
+  void _addListeners() {
     _engine.registerEventHandler(RtcEngineEventHandler(
       onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
         setState(() {
@@ -147,7 +147,7 @@ class _State extends State<JoinChannelVideo> {
     _addListeners();
   }
 
-  _leaveChannel() async {
+  Future<void> _leaveChannel() async {
     await _engine.leaveChannel();
   }
 
@@ -229,7 +229,7 @@ class _State extends State<JoinChannelVideo> {
     );
   }
 
-  _renderVideo() {
+  SafeArea _renderVideo() {
     return SafeArea(
       child: Stack(
         children: [
@@ -298,7 +298,7 @@ class _State extends State<JoinChannelVideo> {
     );
   }
 
-  _ringingView() {
+  Scaffold _ringingView() {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -380,7 +380,7 @@ class _State extends State<JoinChannelVideo> {
     );
   }
 
-  _receiverView() {
+  Scaffold _receiverView() {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -417,7 +417,14 @@ class _State extends State<JoinChannelVideo> {
               ),
               Text(
                 // '${Languageant.youAreReceivingCallFrom.tr}'
-                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'CONSULTANT' : 'USER'}',
+                Get.find<GeneralController>()
+                            .storageBox
+                            .read('userRole')
+                            .toString()
+                            .toUpperCase() ==
+                        'MENTEE'
+                    ? 'CONSULTANT'
+                    : 'USER',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: AppFont.primaryFontFamily,

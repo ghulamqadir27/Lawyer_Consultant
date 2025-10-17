@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../api_services/get_service.dart';
-import '../api_services/urls.dart';
 import '../config/app_colors.dart';
 import '../controllers/general_controller.dart';
 
@@ -12,7 +9,7 @@ import '../controllers/signup_controller.dart';
 import '../models/response_model.dart';
 import '../widgets/custom_dialog.dart';
 
-signUpWithEmailRepo(
+void signUpWithEmailRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   Get.find<GeneralController>().genericResponseModel =
       GetResponseModel.fromJson(response);
@@ -45,7 +42,7 @@ signUpWithEmailRepo(
     }
   } else if (!responseCheck) {
     Get.find<GeneralController>().updateFormLoaderController(false);
-    log("${Get.find<GeneralController>().genericResponseModel.toJson().toString()}");
+    log(Get.find<GeneralController>().genericResponseModel.toJson().toString());
     showDialog(
         context: context,
         builder: (BuildContext context) {

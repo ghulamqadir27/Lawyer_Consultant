@@ -19,7 +19,7 @@ import 'agora.config.dart' as config;
 class JoinChannelAudio extends StatefulWidget {
   final String? channelId;
 
-  const JoinChannelAudio({Key? key, this.channelId}) : super(key: key);
+  const JoinChannelAudio({super.key, this.channelId});
 
   @override
   State<StatefulWidget> createState() => _State();
@@ -33,7 +33,7 @@ class _State extends State<JoinChannelAudio> {
       playEffect = false;
   int? remoteUid;
   int callerType2 = 1;
-  _callEndCheckMethod() {
+  void _callEndCheckMethod() {
     if (callEnd == 2) {
       _leaveChannel();
     }
@@ -87,7 +87,7 @@ class _State extends State<JoinChannelAudio> {
 
   int? callEnd = 0;
 
-  _initEngine() async {
+  Future<void> _initEngine() async {
     _engine = createAgoraRtcEngine();
     await _engine.initialize(RtcEngineContext(appId: config.agoraAppId));
     _addListeners();
@@ -98,7 +98,7 @@ class _State extends State<JoinChannelAudio> {
     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
   }
 
-  _addListeners() {
+  void _addListeners() {
     _engine.registerEventHandler(RtcEngineEventHandler(
       onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
         setState(() {
@@ -159,7 +159,7 @@ class _State extends State<JoinChannelAudio> {
   //   ));
   // }
 
-  _joinChannel() async {
+  Future<void> _joinChannel() async {
     if (defaultTargetPlatform == TargetPlatform.android) {
       await Permission.microphone.request();
     }
@@ -174,12 +174,12 @@ class _State extends State<JoinChannelAudio> {
         .catchError((onError) {});
   }
 
-  _leaveChannel() async {
+  Future<void> _leaveChannel() async {
     await _engine.leaveChannel();
     Get.back();
   }
 
-  _switchMicrophone() {
+  void _switchMicrophone() {
     _engine.enableLocalAudio(!openMicrophone).then((value) {
       setState(() {
         openMicrophone = !openMicrophone;
@@ -187,7 +187,7 @@ class _State extends State<JoinChannelAudio> {
     }).catchError((err) {});
   }
 
-  _switchSpeakerphone() {
+  void _switchSpeakerphone() {
     _engine.setEnableSpeakerphone(!enableSpeakerphone).then((value) {
       setState(() {
         enableSpeakerphone = !enableSpeakerphone;
@@ -320,7 +320,7 @@ class _State extends State<JoinChannelAudio> {
     Navigator.pop(context);
   }
 
-  _ringingView() {
+  Scaffold _ringingView() {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -382,15 +382,15 @@ class _State extends State<JoinChannelAudio> {
                         _leaveChannel();
                         _onCallEnd(context);
                       },
+                      shape: const CircleBorder(),
+                      elevation: 2.0,
+                      fillColor: Colors.redAccent,
+                      padding: const EdgeInsets.all(15.0),
                       child: const Icon(
                         Icons.clear,
                         color: Colors.white,
                         size: 35.0,
                       ),
-                      shape: const CircleBorder(),
-                      elevation: 2.0,
-                      fillColor: Colors.redAccent,
-                      padding: const EdgeInsets.all(15.0),
                     ),
                   ),
                 ),
@@ -402,7 +402,7 @@ class _State extends State<JoinChannelAudio> {
     );
   }
 
-  _receiverView() {
+  Scaffold _receiverView() {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -439,7 +439,14 @@ class _State extends State<JoinChannelAudio> {
               ),
               Text(
                 // '${LanguageConstant.youAreReceivingCallFrom.tr}'
-                '${Get.find<GeneralController>().storageBox.read('userRole').toString().toUpperCase() == 'MENTEE' ? 'CONSULTANT' : 'USER'}',
+                Get.find<GeneralController>()
+                            .storageBox
+                            .read('userRole')
+                            .toString()
+                            .toUpperCase() ==
+                        'MENTEE'
+                    ? 'CONSULTANT'
+                    : 'USER',
                 style: TextStyle(
                     fontSize: 15.sp,
                     fontFamily: AppFont.primaryFontFamily,

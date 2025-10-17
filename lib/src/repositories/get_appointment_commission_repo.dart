@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../controllers/appoinment_commission_controller.dart';
 import '../models/get_appointment_commission_model.dart';
 
-getAppointmentCommissionRepo(
+void getAppointmentCommissionRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GetAppoinmentCommissionController>()

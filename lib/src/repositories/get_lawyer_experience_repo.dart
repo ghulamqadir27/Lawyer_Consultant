@@ -7,7 +7,7 @@ import '../controllers/edit_profile_controller.dart';
 import '../controllers/general_controller.dart';
 import '../models/get_lawyer_profile_experience_model.dart';
 
-getLawyerExperienceRepo(
+void getLawyerExperienceRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<EditProfileController>()

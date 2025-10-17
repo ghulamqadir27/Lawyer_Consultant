@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 GetAppointmentSchedulesModel getAppointmentSchedulesModelFromJson(String str) =>
     GetAppointmentSchedulesModel.fromJson(json.decode(str));

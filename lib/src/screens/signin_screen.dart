@@ -15,7 +15,7 @@ import '../widgets/auth_text_form_field_widget.dart';
 import '../widgets/button_widget.dart';
 
 class SigninScreen extends StatefulWidget {
-  SigninScreen({super.key});
+  const SigninScreen({super.key});
 
   @override
   State<SigninScreen> createState() => _SigninScreenState();
@@ -69,7 +69,9 @@ class _SigninScreenState extends State<SigninScreen> {
                           prefixIcon: "assets/icons/Message.png",
                           controller: signInController.emailController,
                           onChanged: (String value) {},
-                          validator: (String? value) {},
+                          validator: (String? value) {
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 16),
                         AuthPasswordFormFieldWidget(
@@ -78,7 +80,9 @@ class _SigninScreenState extends State<SigninScreen> {
                           prefixIcon: "assets/icons/Unlock.png",
                           controller: signInController.passwordController,
                           onChanged: (String value) {},
-                          validator: (String? value) {},
+                          validator: (String? value) {
+                            return null;
+                          },
                           suffixIconOnTap: () {
                             setState(() {
                               obscurePassword = !obscurePassword;

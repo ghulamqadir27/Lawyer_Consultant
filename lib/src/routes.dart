@@ -28,7 +28,7 @@ import 'screens/lawyer_profile_screen.dart';
 import 'screens/wallet_screen.dart';
 import 'widgets/bottom_navigation_widget.dart';
 
-appRoutes() => [
+List<GetPage> appRoutes() => [
       GetPage(name: '/splashscreen', page: () => const SplashScreen()),
       GetPage(name: '/introscreen', page: () => const IntroScreen()),
       GetPage(name: '/homescreen', page: () => BottomNavigationWidget()),

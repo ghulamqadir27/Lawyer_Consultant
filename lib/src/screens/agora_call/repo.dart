@@ -7,7 +7,7 @@ import '../../api_services/urls.dart';
 import '../../controllers/general_controller.dart';
 import 'get_agora_token_model.dart';
 
-getAgoraTokenRepo(
+void getAgoraTokenRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GeneralController>().getAgoraTokenModel =
@@ -51,7 +51,7 @@ getAgoraTokenRepo(
   }
 }
 
-makeAgoraCallRepo(
+void makeAgoraCallRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     // Get.find<GeneralController>().getAgoraTokenModel =
@@ -106,7 +106,7 @@ makeAgoraCallRepo(
   }
 }
 
-sendCallNotificationRepo(
+void sendCallNotificationRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     log("$response SEND NOTIFICATION RESPONSE");

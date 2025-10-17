@@ -10,7 +10,7 @@ class ContactUsController extends GetxController {
   TextEditingController messageController = TextEditingController();
 
   bool contactUsLoader = false;
-  updateContactUsLoader(bool newValue) {
+  void updateContactUsLoader(bool newValue) {
     contactUsLoader = newValue;
     update();
   }

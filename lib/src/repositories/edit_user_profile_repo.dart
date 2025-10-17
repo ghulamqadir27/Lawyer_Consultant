@@ -24,7 +24,7 @@ import '../widgets/custom_dialog.dart';
 
 import 'logged_in_user_repo.dart';
 
-editUserProfileDataRepo(
+void editUserProfileDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -100,7 +100,7 @@ editUserProfileDataRepo(
   }
 }
 
-editUserProfileImageRepo(
+Future<void> editUserProfileImageRepo(
   String? firstName,
   String? lastName,
   String? userName,
@@ -155,7 +155,7 @@ editUserProfileImageRepo(
         // contentType: ContentType.parse("application/x-www-form-urlencoded"),
       ),
     );
-    log("${response} Image Repo Response");
+    log("$response Image Repo Response");
 
     if (response.statusCode == 200) {
       log("${response}Image Repo Response 2");
@@ -220,8 +220,8 @@ editUserProfileImageRepo(
             );
           });
     }
-  } on dio_instance.DioError catch (e) {
-    log("${e} Image Cath Response");
+  } on dio_instance.DioException catch (e) {
+    log("$e Image Cath Response");
     Get.find<GeneralController>().updateFormLoaderController(false);
     showDialog(
         context: Get.context!,
@@ -243,7 +243,7 @@ editUserProfileImageRepo(
 }
 
 // Education Profile
-editUserProfileEducationDataRepo(
+void editUserProfileEducationDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -320,7 +320,7 @@ editUserProfileEducationDataRepo(
 }
 
 // Certificate Profile
-editUserProfileCertificateDataRepo(
+void editUserProfileCertificateDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -390,7 +390,7 @@ editUserProfileCertificateDataRepo(
 }
 
 // Delete Certificate Profile
-deleteUserProfileCertificateDataRepo(
+void deleteUserProfileCertificateDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -435,7 +435,7 @@ deleteUserProfileCertificateDataRepo(
   }
 }
 
-addUserProfileCertificateDataRepo(
+Future<void> addUserProfileCertificateDataRepo(
   String? name,
   description,
   File? file1,
@@ -469,7 +469,7 @@ addUserProfileCertificateDataRepo(
         // contentType: ContentType.parse("application/x-www-form-urlencoded"),
       ),
     );
-    log("${response} Response");
+    log("$response Response");
 
     if (response.statusCode == 200) {
       if (response.data['success'].toString() == 'true') {
@@ -528,8 +528,8 @@ addUserProfileCertificateDataRepo(
             );
           });
     }
-  } on dio_instance.DioError catch (e) {
-    log("${e} Image Cath Response");
+  } on dio_instance.DioException catch (e) {
+    log("$e Image Cath Response");
     Get.find<GeneralController>().updateFormLoaderController(false);
     showDialog(
         context: Get.context!,
@@ -551,7 +551,7 @@ addUserProfileCertificateDataRepo(
 }
 
 // Delete Experience Profile
-deleteUserProfileExperienceDataRepo(
+void deleteUserProfileExperienceDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -596,7 +596,7 @@ deleteUserProfileExperienceDataRepo(
   }
 }
 
-addUserProfileExperienceDataRepo(
+Future<void> addUserProfileExperienceDataRepo(
   String? companyName,
   String? description,
   dynamic from,
@@ -634,7 +634,7 @@ addUserProfileExperienceDataRepo(
         // contentType: ContentType.parse("application/x-www-form-urlencoded"),
       ),
     );
-    log("${response} Response");
+    log("$response Response");
 
     if (response.statusCode == 200) {
       if (response.data['success'].toString() == 'true') {
@@ -693,8 +693,8 @@ addUserProfileExperienceDataRepo(
             );
           });
     }
-  } on dio_instance.DioError catch (e) {
-    log("${e} Image Cath Response");
+  } on dio_instance.DioException catch (e) {
+    log("$e Image Cath Response");
     Get.find<GeneralController>().updateFormLoaderController(false);
     showDialog(
         context: Get.context!,
@@ -716,7 +716,7 @@ addUserProfileExperienceDataRepo(
 }
 
 // Delete Education Profile
-deleteUserProfileEducationDataRepo(
+void deleteUserProfileEducationDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -761,7 +761,7 @@ deleteUserProfileEducationDataRepo(
   }
 }
 
-addUserProfileEducationDataRepo(
+Future<void> addUserProfileEducationDataRepo(
   String? instituteName,
   String? description,
   String? from,
@@ -802,7 +802,7 @@ addUserProfileEducationDataRepo(
         // contentType: ContentType.parse("application/x-www-form-urlencoded"),
       ),
     );
-    log("${response} Response");
+    log("$response Response");
 
     if (response.statusCode == 200) {
       if (response.data['success'].toString() == 'true') {
@@ -861,8 +861,8 @@ addUserProfileEducationDataRepo(
             );
           });
     }
-  } on dio_instance.DioError catch (e) {
-    log("${e} Image Cath Response");
+  } on dio_instance.DioException catch (e) {
+    log("$e Image Cath Response");
     Get.find<GeneralController>().updateFormLoaderController(false);
     showDialog(
         context: Get.context!,
@@ -884,7 +884,7 @@ addUserProfileEducationDataRepo(
 }
 
 // Delete Podcast Profile
-deleteUserProfilePodcastDataRepo(
+void deleteUserProfilePodcastDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -930,7 +930,7 @@ deleteUserProfilePodcastDataRepo(
 }
 
 // Delete Service Profile
-deleteUserProfileServiceDataRepo(
+void deleteUserProfileServiceDataRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response['success'].toString() == 'true') {
@@ -975,7 +975,7 @@ deleteUserProfileServiceDataRepo(
   }
 }
 
-addUserProfilePodcastDataRepo(
+Future<void> addUserProfilePodcastDataRepo(
   String? name,
   String? description,
   String? fileType,
@@ -1020,7 +1020,7 @@ addUserProfilePodcastDataRepo(
         // contentType: ContentType.parse("application/x-www-form-urlencoded"),
       ),
     );
-    log("${response} Response");
+    log("$response Response");
 
     if (response.statusCode == 200) {
       if (response.data['success'].toString() == 'true') {
@@ -1079,8 +1079,8 @@ addUserProfilePodcastDataRepo(
             );
           });
     }
-  } on dio_instance.DioError catch (e) {
-    log("${e} Image Cath Response");
+  } on dio_instance.DioException catch (e) {
+    log("$e Image Cath Response");
     Get.find<GeneralController>().updateFormLoaderController(false);
     showDialog(
         context: Get.context!,
@@ -1101,7 +1101,7 @@ addUserProfilePodcastDataRepo(
   }
 }
 
-addUserProfileServiceDataRepo(
+Future<void> addUserProfileServiceDataRepo(
   String? name,
   String? description,
   String? serviceCategoryId,
@@ -1141,7 +1141,7 @@ addUserProfileServiceDataRepo(
         // contentType: ContentType.parse("application/x-www-form-urlencoded"),
       ),
     );
-    log("${response} Response");
+    log("$response Response");
 
     if (response.statusCode == 200) {
       if (response.data['success'].toString() == 'true') {
@@ -1200,8 +1200,8 @@ addUserProfileServiceDataRepo(
             );
           });
     }
-  } on dio_instance.DioError catch (e) {
-    log("${e} Image Cath Response");
+  } on dio_instance.DioException catch (e) {
+    log("$e Image Cath Response");
     Get.find<GeneralController>().updateFormLoaderController(false);
     showDialog(
         context: Get.context!,

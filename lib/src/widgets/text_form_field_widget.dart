@@ -9,7 +9,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final FormFieldValidator<String> validator;
 
   // final TextEditingController controller;
-  TextFormFieldWidget({
+  const TextFormFieldWidget({
     super.key,
     required this.hintText,
     this.initialText,

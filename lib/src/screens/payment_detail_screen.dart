@@ -10,7 +10,7 @@ import '../widgets/appbar_widget.dart';
 import '../widgets/button_widget.dart';
 
 class PaymentDetailScreen extends StatefulWidget {
-  PaymentDetailScreen({super.key});
+  const PaymentDetailScreen({super.key});
 
   @override
   State<PaymentDetailScreen> createState() => PaymentDetailScreenState();

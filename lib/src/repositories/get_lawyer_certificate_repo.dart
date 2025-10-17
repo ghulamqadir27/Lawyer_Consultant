@@ -7,7 +7,7 @@ import '../controllers/edit_profile_controller.dart';
 import '../controllers/general_controller.dart';
 import '../models/get_lawyer_profile_certificate_model.dart';
 
-getLawyerCertificateRepo(
+void getLawyerCertificateRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<EditProfileController>()

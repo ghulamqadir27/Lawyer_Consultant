@@ -9,8 +9,8 @@ import '../widgets/custom_dialog.dart';
 import 'header.dart';
 import 'logic.dart';
 
-deleteMethod(BuildContext context, String apiUrl, dynamic queryData,
-    bool addAuthHeader, Function executionMethod
+Future<void> deleteMethod(BuildContext context, String apiUrl,
+    dynamic queryData, bool addAuthHeader, Function executionMethod
     // for performing functionalities
     ) async {
   dio_instance.Response response;
@@ -45,7 +45,7 @@ deleteMethod(BuildContext context, String apiUrl, dynamic queryData,
         }
         log('response   ....  $response');
         executionMethod(context, false, response.data);
-      } on dio_instance.DioError catch (e) {
+      } on dio_instance.DioException catch (e) {
         log('Dio Error  ....  ${e.response}');
         executionMethod(context, false, e.response!.data);
       }

@@ -6,7 +6,7 @@ import '../controllers/general_controller.dart';
 
 import '../widgets/custom_dialog.dart';
 
-forgotPasswordRepo(
+void forgotPasswordRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response["success"] == true) {

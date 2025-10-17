@@ -9,7 +9,8 @@ class CommissionTypeWidget extends StatelessWidget {
   final Widget moduleView;
   final String moduleName;
 
-  CommissionTypeWidget({required this.moduleView, required this.moduleName});
+  const CommissionTypeWidget(
+      {super.key, required this.moduleView, required this.moduleName});
 
   @override
   Widget build(BuildContext context) {

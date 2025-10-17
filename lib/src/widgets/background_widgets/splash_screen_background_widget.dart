@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class SplashBackgroundWidget extends StatelessWidget {
+  const SplashBackgroundWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

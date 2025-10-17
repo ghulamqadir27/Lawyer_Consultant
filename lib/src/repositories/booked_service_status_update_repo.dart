@@ -5,7 +5,7 @@ import '../config/app_colors.dart';
 import '../controllers/general_controller.dart';
 import '../widgets/custom_dialog.dart';
 
-bookedServiceStatusUpdateRepo(
+void bookedServiceStatusUpdateRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (response["success"] == true) {

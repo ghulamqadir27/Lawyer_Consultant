@@ -6,7 +6,7 @@ class GetAllLanguagesController extends GetxController {
   GetAllLanguagesModel getAllLanguagesModel = GetAllLanguagesModel();
 
   bool getAllLanguagesLoader = false;
-  updateAllLanguagesLoader(bool newValue) {
+  void updateAllLanguagesLoader(bool newValue) {
     getAllLanguagesLoader = newValue;
     update();
   }

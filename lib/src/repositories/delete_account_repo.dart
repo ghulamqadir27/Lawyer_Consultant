@@ -9,7 +9,7 @@ import '../controllers/pusher_beams_controller.dart';
 import '../routes.dart';
 import '../widgets/custom_dialog.dart';
 
-deleteAccountRepo(
+void deleteAccountRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GeneralController>().storageBox.erase();

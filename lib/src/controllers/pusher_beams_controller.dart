@@ -15,17 +15,8 @@ import 'general_controller.dart';
 class PusherBeamsController extends GetxController {
   GetPusherBeamsPayloadModel getPusherBeamsPayloadModel =
       GetPusherBeamsPayloadModel();
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  getSecure() async {
+  Future<void> getSecure() async {
     final BeamsAuthProvider provider = BeamsAuthProvider()
       ..authUrl = '${apiBaseUrl}pusher/beams-auth'
       ..headers = {'Content-Type': 'application/json'}
@@ -56,11 +47,11 @@ class PusherBeamsController extends GetxController {
     );
   }
 
-  initPusherBeams() async {
+  Future<void> initPusherBeams() async {
     // Let's see our current interests
     await getSecure();
 
-    log(await "${PusherBeams.instance.getDeviceInterests()} DEVICEINTEREST");
+    log("${PusherBeams.instance.getDeviceInterests()} DEVICEINTEREST");
 
     // This is not intented to use in web
     if (!kIsWeb) {
@@ -90,7 +81,7 @@ class PusherBeamsController extends GetxController {
     dynamic appointmentData = payload["appointment"];
 
     log("${jsonDecode(allData["payload"])} PAYLOAD");
-    log("${appointmentData} APPOINTMENT");
+    log("$appointmentData APPOINTMENT");
 
     // Get.find<GeneralController>().channelForCall =
     //     payload["channel_name"].toString();
@@ -133,7 +124,7 @@ class PusherBeamsController extends GetxController {
     }
   }
 
-  clearAllStatePusherBeams() async {
+  Future<void> clearAllStatePusherBeams() async {
     await PusherBeams.instance.clearAllState();
     log("Pusher Beams States are cleared");
   }

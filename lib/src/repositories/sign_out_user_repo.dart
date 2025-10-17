@@ -9,7 +9,7 @@ import '../controllers/sign_out_user_controller.dart';
 import '../routes.dart';
 import '../widgets/custom_dialog.dart';
 
-signOutUserRepo(
+void signOutUserRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     // Get.find<LoggedInUserController>().loggedInUserModel =

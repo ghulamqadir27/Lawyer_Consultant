@@ -7,7 +7,7 @@ import 'package:lawyer_consultant_for_lawyers/src/controllers/appoinment_schedul
 import '../controllers/general_controller.dart';
 import '../models/appointment_schedules_model.dart';
 
-getAppoinmentSchedulesRepo(
+void getAppoinmentSchedulesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GetAppoinmentSchedulesController>().getAppointmentSchedulesModel =

@@ -5,7 +5,7 @@ class SignOutUserController extends GetxController {
   SignOutModel signOutModel = SignOutModel();
   bool signOutLoaderController = false;
 
-  updateSignOutLoaderController(bool newValue) {
+  void updateSignOutLoaderController(bool newValue) {
     signOutLoaderController = newValue;
     update();
   }

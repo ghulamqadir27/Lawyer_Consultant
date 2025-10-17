@@ -9,7 +9,7 @@ import '../models/get_live_chat_messages_model.dart';
 import '../models/get_live_service_chat_messages_model.dart';
 import '../widgets/custom_dialog.dart';
 
-getLiveChatMessagesRepo(
+void getLiveChatMessagesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<LiveChatController>().getLiveChatMessagesModel =
@@ -48,7 +48,7 @@ getLiveChatMessagesRepo(
   }
 }
 
-getServiceChatMessagesRepo(
+void getServiceChatMessagesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<LiveChatController>().getLiveServiceChatMessagesModel =
@@ -91,7 +91,7 @@ getServiceChatMessagesRepo(
   }
 }
 
-sendMessagesRepo(
+void sendMessagesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<LiveChatController>().messageController.clear();
@@ -105,7 +105,7 @@ sendMessagesRepo(
   }
 }
 
-sendServiceMessagesRepo(
+void sendServiceMessagesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<LiveChatController>().serviceMessageController.clear();

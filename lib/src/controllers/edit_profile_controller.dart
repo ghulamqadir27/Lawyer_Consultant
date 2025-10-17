@@ -106,96 +106,96 @@ class EditProfileController extends GetxController {
   List<LawyerProfileServiceModel> lawyerProfileServiceForPagination = [];
 
   bool allLawyerCertificateLoader = false;
-  updateLawyerCertificateLoader(bool newValue) {
+  void updateLawyerCertificateLoader(bool newValue) {
     allLawyerCertificateLoader = newValue;
     update();
   }
 
   bool allLawyerExperienceLoader = false;
-  updateLawyerExperienceLoader(bool newValue) {
+  void updateLawyerExperienceLoader(bool newValue) {
     allLawyerExperienceLoader = newValue;
     update();
   }
 
   bool allLawyerEducationLoader = false;
-  updateLawyerEducationLoader(bool newValue) {
+  void updateLawyerEducationLoader(bool newValue) {
     allLawyerEducationLoader = newValue;
     update();
   }
 
   bool allLawyerPodcastLoader = false;
-  updateLawyerPodcastLoader(bool newValue) {
+  void updateLawyerPodcastLoader(bool newValue) {
     allLawyerPodcastLoader = newValue;
     update();
   }
 
   bool allLawyerServiceLoader = false;
-  updateLawyerServiceLoader(bool newValue) {
+  void updateLawyerServiceLoader(bool newValue) {
     allLawyerServiceLoader = newValue;
     update();
   }
 
   ///------------------------------- Lawyer-Certificate-data-check
   bool getLawyerCertificateCheck = false;
-  getLawyerCertificateDataCheck(bool value) {
+  void getLawyerCertificateDataCheck(bool value) {
     getLawyerCertificateCheck = value;
     update();
   }
 
   ///------------------------------- Lawyer-Experience-data-check
   bool getLawyerExperienceCheck = false;
-  getLawyerExperienceDataCheck(bool value) {
+  void getLawyerExperienceDataCheck(bool value) {
     getLawyerExperienceCheck = value;
     update();
   }
 
   ///------------------------------- Lawyer-Education-data-check
   bool getLawyerEducationCheck = false;
-  getLawyerEducationDataCheck(bool value) {
+  void getLawyerEducationDataCheck(bool value) {
     getLawyerEducationCheck = value;
     update();
   }
 
   ///------------------------------- Lawyer-Podcast-data-check
   bool getLawyerPodcastCheck = false;
-  getLawyerPodcastDataCheck(bool value) {
+  void getLawyerPodcastDataCheck(bool value) {
     getLawyerPodcastCheck = value;
     update();
   }
 
   ///------------------------------- Lawyer-Service-data-check
   bool getLawyerServiceCheck = false;
-  getLawyerServiceDataCheck(bool value) {
+  void getLawyerServiceDataCheck(bool value) {
     getLawyerServiceCheck = value;
     update();
   }
 
   int? selectedLawyerCertificateIndex = 0;
-  updateSelectedLawyerCertificateIndex(int? newValue) {
+  void updateSelectedLawyerCertificateIndex(int? newValue) {
     selectedLawyerCertificateIndex = newValue;
     update();
   }
 
   int? selectedLawyerExperienceIndex = 0;
-  updateSelectedLawyerExperienceIndex(int? newValue) {
+  void updateSelectedLawyerExperienceIndex(int? newValue) {
     selectedLawyerExperienceIndex = newValue;
     update();
   }
 
   int? selectedLawyerEducationIndex = 0;
-  updateSelectedLawyerEducationIndex(int? newValue) {
+  void updateSelectedLawyerEducationIndex(int? newValue) {
     selectedLawyerEducationIndex = newValue;
     update();
   }
 
   int? selectedLawyerPodcastIndex = 0;
-  updateSelectedLawyerPodcastIndex(int? newValue) {
+  void updateSelectedLawyerPodcastIndex(int? newValue) {
     selectedLawyerPodcastIndex = newValue;
     update();
   }
 
   int? selectedLawyerServiceIndex = 0;
-  updateSelectedLawyerServiceIndex(int? newValue) {
+  void updateSelectedLawyerServiceIndex(int? newValue) {
     selectedLawyerServiceIndex = newValue;
     update();
   }
@@ -275,31 +275,31 @@ class EditProfileController extends GetxController {
     }
   }
 
-  updateLawyerCertificateForPagination(
+  void updateLawyerCertificateForPagination(
       LawyerProfileCertificateModel lawyerProfileCertificateModel) {
     lawyerProfileCertificateForPagination.add(lawyerProfileCertificateModel);
     update();
   }
 
-  updateLawyerExperienceForPagination(
+  void updateLawyerExperienceForPagination(
       LawyerProfileExperienceModel lawyerProfileExperienceModel) {
     lawyerProfileExperienceForPagination.add(lawyerProfileExperienceModel);
     update();
   }
 
-  updateLawyerEducationForPagination(
+  void updateLawyerEducationForPagination(
       LawyerProfileEducationModel lawyerProfileEducationModel) {
     lawyerProfileEducationForPagination.add(lawyerProfileEducationModel);
     update();
   }
 
-  updateLawyerPodcastForPagination(
+  void updateLawyerPodcastForPagination(
       LawyerProfilePodcastModel lawyerProfilePodcastModel) {
     lawyerProfilePodcastForPagination.add(lawyerProfilePodcastModel);
     update();
   }
 
-  updateLawyerServiceForPagination(
+  void updateLawyerServiceForPagination(
       LawyerProfileServiceModel lawyerProfileServiceModel) {
     lawyerProfileServiceForPagination.add(lawyerProfileServiceModel);
     update();
@@ -308,7 +308,7 @@ class EditProfileController extends GetxController {
   ///------------------------------- user-profile-data-check
   bool getUserProfileDataCheck = false;
 
-  changeGetUserProfileDataCheck(bool value) {
+  void changeGetUserProfileDataCheck(bool value) {
     getUserProfileDataCheck = value;
     update();
   }

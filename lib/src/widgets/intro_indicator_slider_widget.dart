@@ -7,7 +7,7 @@ import '../config/app_font.dart';
 import '../controllers/themes_controller.dart';
 
 class IndicatorSliderWidget extends StatefulWidget {
-  IndicatorSliderWidget({Key? key}) : super(key: key);
+  const IndicatorSliderWidget({super.key});
 
   @override
   State<IndicatorSliderWidget> createState() => _IndicatorSliderWidgetState();
@@ -114,12 +114,12 @@ final List<Widget> imageSliders = List.generate(3, (index) {
 class SliderImageStyle extends StatelessWidget {
   final String img, description;
   final RichText tagLine;
-  SliderImageStyle({
-    Key? key,
+  const SliderImageStyle({
+    super.key,
     required this.img,
     required this.description,
     required this.tagLine,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

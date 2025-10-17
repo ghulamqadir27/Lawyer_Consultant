@@ -6,7 +6,7 @@ import '../controllers/logged_in_user_controller.dart';
 import '../models/logged_in_user_model.dart';
 import '../widgets/custom_dialog.dart';
 
-loggedInUserRepo(
+void loggedInUserRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<LoggedInUserController>().loggedInUserModel =

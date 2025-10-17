@@ -8,7 +8,7 @@ class GetContentPagesController extends GetxController {
   GetContentPagesModel getContentPagesModel = GetContentPagesModel();
 
   bool getContentPagesLoader = false;
-  updateContentPagesLoader(bool newValue) {
+  void updateContentPagesLoader(bool newValue) {
     getContentPagesLoader = newValue;
     update();
   }

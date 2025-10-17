@@ -4,7 +4,7 @@ import '../config/app_colors.dart';
 import '../config/app_text_styles.dart';
 
 class SearchFilterWidget extends StatelessWidget {
-  SearchFilterWidget({
+  const SearchFilterWidget({
     super.key,
   });
 

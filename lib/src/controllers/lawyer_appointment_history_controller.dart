@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resize/resize.dart';
-import '../api_services/post_service.dart';
 import '../models/lawyer_appointment_history_model.dart';
 import 'general_controller.dart';
 
@@ -12,7 +11,7 @@ class LawyerAppointmentHistoryController extends GetxController {
       GetLawyerAppointmentHistoryModel();
 
   bool allLawyerAppointmentHistoryLoader = false;
-  updateLawyerAppointmentHistoryLoader(bool newValue) {
+  void updateLawyerAppointmentHistoryLoader(bool newValue) {
     allLawyerAppointmentHistoryLoader = newValue;
     update();
   }
@@ -35,13 +34,13 @@ class LawyerAppointmentHistoryController extends GetxController {
 
   ///------------------------------- Lawyers-data-check
   bool getLawyerAppointmentHistoryDataCheck = false;
-  getLawyerAppointmentHistorysDataCheck(bool value) {
+  void getLawyerAppointmentHistorysDataCheck(bool value) {
     getLawyerAppointmentHistoryDataCheck = value;
     update();
   }
 
   int? selectedLawyerCategoryIndex = 0;
-  updateSelectedLawyerCategoryIndex(int? newValue) {
+  void updateSelectedLawyerCategoryIndex(int? newValue) {
     selectedLawyerCategoryIndex = newValue;
     update();
   }
@@ -72,7 +71,7 @@ class LawyerAppointmentHistoryController extends GetxController {
     }
   }
 
-  updateLawyerListForPagination(
+  void updateLawyerListForPagination(
       LawyerAppointmentHistoryModel lawyerAppointmentHistoryModel) {
     lawyerAllAppointmentHistoryListForPagination
         .add(lawyerAppointmentHistoryModel);

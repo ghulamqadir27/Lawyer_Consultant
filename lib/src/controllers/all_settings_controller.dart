@@ -4,7 +4,7 @@ import '../models/all_settings_model.dart';
 class GetAllSettingsController extends GetxController {
   GetAllSettingsModel getAllSettingsModel = GetAllSettingsModel();
 
-  getDisplayAmount(amount) {
+  dynamic getDisplayAmount(amount) {
     if (Get.find<GetAllSettingsController>()
             .getAllSettingsModel
             .data!
@@ -30,7 +30,7 @@ class GetAllSettingsController extends GetxController {
     }
   }
 
-  getDefaultCurrencySymbol() {
+  String getDefaultCurrencySymbol() {
     var defaultCurrency = Get.find<GetAllSettingsController>()
         .getAllSettingsModel
         .data!
@@ -39,7 +39,7 @@ class GetAllSettingsController extends GetxController {
   }
 
   bool getAllSettingsLoader = false;
-  updateAllSettingsLoader(bool newValue) {
+  void updateAllSettingsLoader(bool newValue) {
     getAllSettingsLoader = newValue;
     update();
   }

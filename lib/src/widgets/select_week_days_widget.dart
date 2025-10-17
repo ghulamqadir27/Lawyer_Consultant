@@ -49,7 +49,7 @@ class SelectWeekDays extends StatefulWidget {
 
   /// `SelectWeekDays` takes a list of days of type `DayInWeek`.
   /// `onSelect` property will return `list` of days that are selected.
-  SelectWeekDays({
+  const SelectWeekDays({
     required this.onSelect,
     this.backgroundColor,
     this.fontWeight,
@@ -82,11 +82,11 @@ class SelectWeekDaysState extends State<SelectWeekDays> {
 
   @override
   void initState() {
-    _daysInWeek.forEach((element) {
+    for (var element in _daysInWeek) {
       if (element.isSelected) {
         selectedDays.add(element.dayKey);
       }
-    });
+    }
     super.initState();
   }
 
@@ -173,12 +173,11 @@ class SelectWeekDaysState extends State<SelectWeekDays> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width ?? MediaQuery.of(context).size.width,
-      decoration: widget.boxDecoration == null
-          ? BoxDecoration(
-              color: _handleBackgroundColor,
-              borderRadius: BorderRadius.circular(0),
-            )
-          : widget.boxDecoration,
+      decoration: widget.boxDecoration ??
+          BoxDecoration(
+            color: _handleBackgroundColor,
+            borderRadius: BorderRadius.circular(0),
+          ),
       child: Padding(
         padding: EdgeInsets.all(widget.padding),
         child: Row(
@@ -266,10 +265,10 @@ class DayInWeek {
       {required this.dayKey, this.isSelected = false, this.isDisabled = false});
 
   void toggleIsSelected() {
-    this.isSelected = !this.isSelected;
+    isSelected = !isSelected;
   }
 
   void toggleIsDisabled() {
-    this.isDisabled = !this.isDisabled;
+    isDisabled = !isDisabled;
   }
 }

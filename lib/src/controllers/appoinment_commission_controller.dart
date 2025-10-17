@@ -6,7 +6,7 @@ class GetAppoinmentCommissionController extends GetxController {
       GetAppointmentCommissionModel();
 
   bool getAppointmentCommissionLoader = false;
-  updateAppointmentCommissionLoader(bool newValue) {
+  void updateAppointmentCommissionLoader(bool newValue) {
     getAppointmentCommissionLoader = newValue;
     update();
   }

@@ -18,7 +18,7 @@ import '../widgets/audio_call_appointment_slots_widget.dart';
 import '../widgets/video_call_appointment_slots_widget.dart';
 
 class ScheduleAppSlotsScreen extends StatefulWidget {
-  ScheduleAppSlotsScreen({super.key});
+  const ScheduleAppSlotsScreen({super.key});
 
   @override
   State<ScheduleAppSlotsScreen> createState() => _ScheduleAppSlotsScreenState();

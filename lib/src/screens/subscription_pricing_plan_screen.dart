@@ -19,7 +19,7 @@ import '../widgets/button_widget.dart';
 import '../widgets/custom_skeleton_loader.dart';
 
 class SubscriptionPricingPlanScreen extends StatefulWidget {
-  SubscriptionPricingPlanScreen({super.key});
+  const SubscriptionPricingPlanScreen({super.key});
 
   @override
   State<SubscriptionPricingPlanScreen> createState() =>
@@ -149,7 +149,6 @@ class SubscriptionPricingPlanScreenState
                                                       36.w, 12.h, 36.w, 18.h),
                                                   child: ButtonWidgetOne(
                                                     borderRadius: 10,
-                                                
                                                     buttonText:
                                                         'Select this Plan',
                                                     buttonTextStyle:

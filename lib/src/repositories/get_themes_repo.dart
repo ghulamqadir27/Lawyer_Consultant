@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../controllers/themes_controller.dart';
 import '../models/get_themes_model.dart';
 
-getThemesRepo(
+void getThemesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GetThemesController>().getThemesModel =

@@ -12,7 +12,7 @@ class AuthTextFormFieldWidget extends StatelessWidget {
   final FormFieldValidator<String> validator;
 
   // final TextEditingController controller;
-  AuthTextFormFieldWidget({
+  const AuthTextFormFieldWidget({
     super.key,
     required this.hintText,
     required this.prefixIconColor,
@@ -82,7 +82,7 @@ class AuthPasswordFormFieldWidget extends StatelessWidget {
   final FormFieldValidator<String> validator;
 
   // final TextEditingController controller;
-  AuthPasswordFormFieldWidget({
+  const AuthPasswordFormFieldWidget({
     super.key,
     required this.hintText,
     required this.prefixIconColor,

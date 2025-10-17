@@ -8,7 +8,7 @@ import '../config/app_text_styles.dart';
 import '../widgets/appbar_widget.dart';
 
 class AboutUsScreen extends StatelessWidget {
-  AboutUsScreen({super.key});
+  const AboutUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

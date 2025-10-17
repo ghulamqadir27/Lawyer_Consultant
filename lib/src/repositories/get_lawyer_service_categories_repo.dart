@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/edit_profile_controller.dart';
 import '../models/get_lawyer_service_categories_model.dart';
 
-getLawyerServiceCategoriesRepo(
+void getLawyerServiceCategoriesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<EditProfileController>().getLawyerServiceCategoriesModel =

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:lawyer_consultant_for_lawyers/src/controllers/wallet_controller.dart';
 import 'package:lawyer_consultant_for_lawyers/src/models/get_wallet_balance_model.dart';
 
-getWalletBalanceRepo(
+void getWalletBalanceRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<WalletController>().getWalletBalanceModel =

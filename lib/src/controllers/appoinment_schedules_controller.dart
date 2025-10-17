@@ -9,7 +9,7 @@ class GetAppoinmentSchedulesController extends GetxController {
       GetAppointmentSchedulesModel();
 
   bool getAppointmentSchedulesLoader = false;
-  updateAppointmentSchedulesLoader(bool newValue) {
+  void updateAppointmentSchedulesLoader(bool newValue) {
     getAppointmentSchedulesLoader = newValue;
     update();
   }

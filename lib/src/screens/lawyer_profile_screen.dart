@@ -34,7 +34,7 @@ import '../widgets/custom_dialog.dart';
 import '../widgets/text_form_field_widget.dart';
 
 class LawyerProfileScreen extends StatefulWidget {
-  LawyerProfileScreen({super.key});
+  const LawyerProfileScreen({super.key});
 
   @override
   State<LawyerProfileScreen> createState() => LawyerProfileScreenState();
@@ -51,7 +51,7 @@ class LawyerProfileScreenState extends State<LawyerProfileScreen>
   TabController? tabController;
   bool isVisibleEducationForm = false;
 
-  filePick() async {
+  Future<void> filePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -851,7 +851,7 @@ class LawyerProfileScreenState extends State<LawyerProfileScreen>
 }
 
 class LawyerCertificateWidget extends StatefulWidget {
-  LawyerCertificateWidget({super.key});
+  const LawyerCertificateWidget({super.key});
 
   @override
   State<LawyerCertificateWidget> createState() =>
@@ -863,7 +863,7 @@ class _LawyerCertificateWidgetState extends State<LawyerCertificateWidget> {
 
   bool isVisibleEducationForm = false;
   File? file;
-  filePick() async {
+  Future<void> filePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -1283,7 +1283,7 @@ class _LawyerCertificateWidgetState extends State<LawyerCertificateWidget> {
 }
 
 class LawyerExperienceWidget extends StatefulWidget {
-  LawyerExperienceWidget({super.key});
+  const LawyerExperienceWidget({super.key});
 
   @override
   State<LawyerExperienceWidget> createState() => _LawyerExperienceWidgetState();
@@ -1294,7 +1294,7 @@ class _LawyerExperienceWidgetState extends State<LawyerExperienceWidget> {
 
   bool isVisibleEducationForm = false;
   File? file;
-  filePick() async {
+  Future<void> filePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -1780,7 +1780,7 @@ class _LawyerExperienceWidgetState extends State<LawyerExperienceWidget> {
 }
 
 class LawyerEducationWidget extends StatefulWidget {
-  LawyerEducationWidget({super.key});
+  const LawyerEducationWidget({super.key});
 
   @override
   State<LawyerEducationWidget> createState() => _LawyerEducationWidgetState();
@@ -1791,7 +1791,7 @@ class _LawyerEducationWidgetState extends State<LawyerEducationWidget> {
 
   bool isVisibleEducationForm = false;
   File? file;
-  filePick() async {
+  Future<void> filePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -2355,7 +2355,7 @@ class _LawyerEducationWidgetState extends State<LawyerEducationWidget> {
 }
 
 class LawyerPodcastsWidget extends StatefulWidget {
-  LawyerPodcastsWidget({super.key});
+  const LawyerPodcastsWidget({super.key});
 
   @override
   State<LawyerPodcastsWidget> createState() => _LawyerPodcastsWidgetState();
@@ -2371,7 +2371,7 @@ class _LawyerPodcastsWidgetState extends State<LawyerPodcastsWidget> {
   dynamic selectedFileType;
   dynamic selectedLinkType;
 
-  filePick() async {
+  Future<void> filePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -2385,7 +2385,7 @@ class _LawyerPodcastsWidgetState extends State<LawyerPodcastsWidget> {
     }
   }
 
-  audioFilePick() async {
+  Future<void> audioFilePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -2399,7 +2399,7 @@ class _LawyerPodcastsWidgetState extends State<LawyerPodcastsWidget> {
     }
   }
 
-  videoFilePick() async {
+  Future<void> videoFilePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -3035,7 +3035,7 @@ class _LawyerPodcastsWidgetState extends State<LawyerPodcastsWidget> {
 }
 
 class LawyerServicesWidget extends StatefulWidget {
-  LawyerServicesWidget({super.key});
+  const LawyerServicesWidget({super.key});
 
   @override
   State<LawyerServicesWidget> createState() => _LawyerServicesWidgetState();
@@ -3049,7 +3049,7 @@ class _LawyerServicesWidgetState extends State<LawyerServicesWidget> {
   dynamic selectedServiceCategoryName;
   dynamic selectedServiceCategoryId;
 
-  filePick() async {
+  Future<void> filePick() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
@@ -3194,7 +3194,7 @@ class _LawyerServicesWidgetState extends State<LawyerServicesWidget> {
                                 LanguageConstant.serviceCategories.tr,
                                 style: AppTextStyles.hintTextStyle1,
                               ),
-                              value: selectedServiceCategoryId,
+                              initialValue: selectedServiceCategoryId,
                               items: editProfileController
                                   .getLawyerServiceCategoriesModel.data
                                   ?.map((serviceCategoriesName) {

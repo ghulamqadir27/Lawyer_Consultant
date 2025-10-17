@@ -10,7 +10,7 @@ class GetThemesController extends GetxController {
   String? selectedTertiaryColor;
   String? themeCode;
   bool themesLoader = false;
-  updateThemesLoader(bool newValue) {
+  void updateThemesLoader(bool newValue) {
     themesLoader = newValue;
     update();
   }

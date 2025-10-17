@@ -16,7 +16,7 @@ import '../widgets/appbar_widget.dart';
 import '../widgets/custom_skeleton_loader.dart';
 
 class BookedServicesScreen extends StatefulWidget {
-  BookedServicesScreen({super.key});
+  const BookedServicesScreen({super.key});
 
   @override
   State<BookedServicesScreen> createState() => _BookedServicesScreenState();

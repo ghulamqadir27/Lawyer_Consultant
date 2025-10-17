@@ -10,7 +10,7 @@ import '../config/app_colors.dart';
 import '../controllers/general_controller.dart';
 import '../widgets/custom_dialog.dart';
 
-getMethod(BuildContext context, String apiUrl, dynamic queryData,
+Future<void> getMethod(BuildContext context, String apiUrl, dynamic queryData,
     bool addAuthHeader, Function executionMethod) async {
   dio_instance.Response response;
   dio_instance.Dio dio = dio_instance.Dio();
@@ -41,7 +41,7 @@ getMethod(BuildContext context, String apiUrl, dynamic queryData,
         }
         log('getApi $apiUrl ---->>>>  ${response.data}');
         executionMethod(context, false, response.data);
-      } on dio_instance.DioError catch (e) {
+      } on dio_instance.DioException catch (e) {
         log('Dio Error     $apiUrl $queryData ---->>>>${e.response}');
         executionMethod(context, false, e.response!.data);
 

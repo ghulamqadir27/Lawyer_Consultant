@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../routes.dart';
 
 class InitVideoCallView extends StatefulWidget {
-  const InitVideoCallView({Key? key}) : super(key: key);
+  const InitVideoCallView({super.key});
 
   @override
   _InitVideoCallViewState createState() => _InitVideoCallViewState();
@@ -27,7 +27,7 @@ class _InitVideoCallViewState extends State<InitVideoCallView> {
 }
 
 class NotificationRoute extends StatefulWidget {
-  const NotificationRoute({Key? key, this.route}) : super(key: key);
+  const NotificationRoute({super.key, this.route});
 
   final String? route;
   @override

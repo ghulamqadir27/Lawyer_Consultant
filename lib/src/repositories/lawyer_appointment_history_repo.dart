@@ -6,7 +6,7 @@ import '../controllers/lawyer_appointment_history_controller.dart';
 import '../controllers/general_controller.dart';
 import '../models/lawyer_appointment_history_model.dart';
 
-getAllLawyerAppointmentHistoryRepo(
+void getAllLawyerAppointmentHistoryRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<LawyerAppointmentHistoryController>()

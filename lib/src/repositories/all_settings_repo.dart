@@ -7,7 +7,7 @@ import '../config/app_configs.dart';
 import '../controllers/all_settings_controller.dart';
 import '../models/all_settings_model.dart';
 
-getAllSettingsRepo(
+void getAllSettingsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GetAllSettingsController>().getAllSettingsModel =

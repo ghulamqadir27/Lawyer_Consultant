@@ -7,7 +7,7 @@ import '../controllers/content_pages_controller.dart';
 
 import '../models/content_pages_model.dart';
 
-getContentPagesRepo(
+void getContentPagesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GetContentPagesController>().getContentPagesModel =

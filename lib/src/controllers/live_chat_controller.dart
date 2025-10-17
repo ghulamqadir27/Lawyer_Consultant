@@ -12,12 +12,12 @@ class LiveChatController extends GetxController {
   bool getMessagesLoader = true;
   bool getServiceMessagesLoader = true;
 
-  updateGetMessagesLoader(bool newValue) {
+  void updateGetMessagesLoader(bool newValue) {
     getMessagesLoader = newValue;
     update();
   }
 
-  updateGetServiceMessagesLoader(bool newValue) {
+  void updateGetServiceMessagesLoader(bool newValue) {
     getServiceMessagesLoader = newValue;
     update();
   }
@@ -25,42 +25,42 @@ class LiveChatController extends GetxController {
   // final ScrollController messageScrollController = ScrollController();
   List<dynamic> messageList = [];
   List<dynamic> serviceMessageList = [];
-  updateMessageList(newValue) {
+  void updateMessageList(newValue) {
     messageList.add(newValue);
     update();
   }
 
-  updateServiceMessageList(newValue) {
+  void updateServiceMessageList(newValue) {
     serviceMessageList.add(newValue);
     update();
   }
 
-  emptyMessageList() {
+  void emptyMessageList() {
     messageList = [];
     update();
   }
 
-  emptyServiceMessageList() {
+  void emptyServiceMessageList() {
     serviceMessageList = [];
     update();
   }
 
   bool? showSendIcon = false;
-  updateShowSendIcon(bool? newValue) {
+  void updateShowSendIcon(bool? newValue) {
     showSendIcon = newValue;
     update();
   }
 
   int? senderMessageGetId;
 
-  updateSenderMessageGetId(int? newValue) {
+  void updateSenderMessageGetId(int? newValue) {
     senderMessageGetId = newValue;
     update();
   }
 
   int? receiverMessageGetId;
 
-  updateReceiverMessageGetId(int? newValue) {
+  void updateReceiverMessageGetId(int? newValue) {
     receiverMessageGetId = newValue;
     update();
   }

@@ -6,7 +6,7 @@ import '../controllers/general_controller.dart';
 import '../controllers/lawyer_booked_services_controller.dart';
 import '../models/lawyer_booked_services_model.dart';
 
-getAllLawyerBookedServicesRepo(
+void getAllLawyerBookedServicesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<LawyerBookedServicesController>()

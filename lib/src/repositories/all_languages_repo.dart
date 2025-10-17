@@ -5,7 +5,7 @@ import '../controllers/all_languages_controller.dart';
 import '../controllers/general_controller.dart';
 import '../models/all_languages_model.dart';
 
-getAllLanguagesRepo(
+void getAllLanguagesRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     Get.find<GetAllLanguagesController>().getAllLanguagesModel =

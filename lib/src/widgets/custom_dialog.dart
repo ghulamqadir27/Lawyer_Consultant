@@ -10,14 +10,13 @@ class CustomDialogBox extends StatefulWidget {
   final Function? functionCall;
 
   const CustomDialogBox(
-      {Key? key,
+      {super.key,
       this.title,
       this.descriptions,
       this.text,
       this.img,
       this.titleColor,
-      this.functionCall})
-      : super(key: key);
+      this.functionCall});
 
   @override
   _CustomDialogBoxState createState() => _CustomDialogBoxState();
@@ -36,7 +35,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
     );
   }
 
-  contentBox(context) {
+  Stack contentBox(context) {
     return Stack(
       children: <Widget>[
         Container(

@@ -5,7 +5,7 @@ import '../config/app_text_styles.dart';
 
 class CategoryExpansionTileWidget extends StatelessWidget {
   final String categoryTitle, categoryIcon;
-  CategoryExpansionTileWidget({
+  const CategoryExpansionTileWidget({
     super.key,
     required this.categoryTitle,
     required this.categoryIcon,

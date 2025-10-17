@@ -7,7 +7,7 @@ import 'package:lawyer_consultant_for_lawyers/src/models/get_wallet_withdrawals_
 
 import '../controllers/general_controller.dart';
 
-getWalletWithdrawalsRepo(
+void getWalletWithdrawalsRepo(
     BuildContext context, bool responseCheck, Map<String, dynamic> response) {
   if (responseCheck) {
     if (Get.find<WalletController>().walletWithdrawalForPagination.isNotEmpty) {
