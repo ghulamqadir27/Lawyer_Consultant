@@ -22,7 +22,7 @@ import '../repositories/live_chat_messages_repo.dart';
 import '../widgets/appbar_widget.dart';
 
 class LiveServiceChatScreen extends StatefulWidget {
-  LiveServiceChatScreen({super.key});
+  const LiveServiceChatScreen({super.key});
 
   @override
   State<LiveServiceChatScreen> createState() => _LiveServiceChatScreenState();
@@ -65,8 +65,7 @@ class _LiveServiceChatScreenState extends State<LiveServiceChatScreen> {
         onConnectionStateChange: onConnectionStateChange,
         onError: onError,
         onSubscriptionSucceeded: onSubscriptionSucceeded,
-        onEvent: onEvent(
-            PusherEvent(channelName: _channelName, eventName: _eventName)),
+        onEvent: onEvent,
         onSubscriptionError: onSubscriptionError,
         onDecryptionFailure: onDecryptionFailure,
         onMemberAdded: onMemberAdded,
@@ -140,7 +139,7 @@ class _LiveServiceChatScreenState extends State<LiveServiceChatScreen> {
     log("onError: $message code: $code exception: $e");
   }
 
-  onEvent(PusherEvent event) {
+  void onEvent(PusherEvent event) {
     log("onEvent: ${event.data}");
   }
 

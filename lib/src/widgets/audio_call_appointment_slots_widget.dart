@@ -120,97 +120,86 @@ class _AudioCallAppointmentSlotsWidgetState
   }
 
   void generateSlots() {
-    if (startTime == null || endTime == null || intervalMinutes == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        Get.find<GeneralController>().showSnackBar(
-          LanguageConstant.pleaseSelectDayStartTimeandEndTime.tr,
-        ),
-      );
-      return;
-    }
-
-    generatedSlots = generateTimeSlot();
-
-    print("$generatedSlots TESTING");
+    log("--- Generating Slots ---");
+    log("Selected Days: $selectedDays");
+    log("Start Time: $startTime");
+    log("End Time: $endTime");
+    log("Interval (minutes): $intervalMinutes");
+    final newSlots = generateTimeSlot();
+    setState(() {
+      generatedSlots = newSlots;
+    });
+    log("$generatedSlots TESTING");
   }
 
   void forSingleDayGenerateSlots() {
-    if (forSingleDayStartTime == null ||
-        forSingleDayEndTime == null ||
-        intervalMinutes == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        Get.find<GeneralController>().showSnackBar(
-          LanguageConstant.pleaseSelectDayStartTimeandEndTime.tr,
-        ),
-      );
-      return;
-    }
-
     singleDayGeneratedSlots = forSingleDayGenerateTimeSlot();
 
     print("$singleDayGeneratedSlots TESTING");
   }
 
   Map<String, List<Map<String, dynamic>>> generateTimeSlot() {
-    setState(() {
-      isGenerating = true;
-    });
-
+    if (generatedSlots.containsKey('key')) {}
+    generatedSlots.clear();
     for (String day in selectedDays) {
+      if (generatedSlots.containsKey(day)) continue;
+
       generatedSlots[day] = [];
 
       TimeOfDay currentStartTime = startTime!;
 
-      while (currentStartTime.hour < endTime!.hour ||
-          (currentStartTime.hour == endTime!.hour &&
-              currentStartTime.minute < endTime!.minute)) {
+      setState(() {
+        isGenerating = true;
+      });
+
+      while (currentStartTime.hour * 60 + currentStartTime.minute <
+          endTime!.hour * 60 + endTime!.minute) {
+        log("Running");
+
         int addHour = currentStartTime.hour * 60 +
             currentStartTime.minute +
             intervalMinutes!;
-        var currentEndTime = currentStartTime.replacing(
-          hour: addHour ~/ 60,
-          minute: addHour % 60,
-        );
+        var currentEndTime =
+            TimeOfDay(hour: addHour ~/ 60, minute: addHour % 60);
 
         if (currentEndTime.hour > endTime!.hour ||
             (currentEndTime.hour == endTime!.hour &&
                 currentEndTime.minute > endTime!.minute)) {
+          // Adjust the end time to be equal to or less than the end time provided.
           currentEndTime = endTime!;
         }
 
-        // Only add slot if start time is before end time
-        if (currentStartTime.hour < currentEndTime.hour ||
-            (currentStartTime.hour == currentEndTime.hour &&
-                currentStartTime.minute < currentEndTime.minute)) {
-          generatedSlots[day]!.add({
-            'start_time': currentStartTime.format(context),
-            'end_time': currentEndTime.format(context),
-            'is_active': true,
-          });
-        }
+        generatedSlots[day]!.add({
+          'start_time': currentStartTime.format(context),
+          'end_time': currentEndTime.format(context),
+          'is_active': true,
+        });
+        log("${currentStartTime.format(context)} CurrentStartTime");
+        log("${currentEndTime.format(context)} CurrentEndTime");
 
         currentStartTime = currentEndTime;
       }
     }
 
-    setState(() {
-      isGenerating = false;
-    });
+    setState(() => isGenerating = false);
+
     return generatedSlots;
   }
 
   Map<String, List<Map<String, dynamic>>> forSingleDayGenerateTimeSlot() {
-    setState(() {
-      isGenerating = true;
-    });
+    if (singleDayGeneratedSlots.containsKey('key')) {}
 
     singleDayGeneratedSlots[selectedDay] = [];
 
     TimeOfDay currentStartTime = forSingleDayStartTime!;
 
-    while (currentStartTime.hour < forSingleDayEndTime!.hour ||
-        (currentStartTime.hour == forSingleDayEndTime!.hour &&
-            currentStartTime.minute < forSingleDayEndTime!.minute)) {
+    while (currentStartTime.hour * 60 + currentStartTime.minute <
+        forSingleDayEndTime!.hour * 60 + forSingleDayEndTime!.minute) {
+      log("Running");
+      setState(() {
+        isGenerating = true;
+      });
+
       int addHour = currentStartTime.hour * 60 +
           currentStartTime.minute +
           intervalMinutes!;
@@ -222,13 +211,11 @@ class _AudioCallAppointmentSlotsWidgetState
       if (currentEndTime.hour > forSingleDayEndTime!.hour ||
           (currentEndTime.hour == forSingleDayEndTime!.hour &&
               currentEndTime.minute > forSingleDayEndTime!.minute)) {
+        // Adjust the end time to be equal to or less than the end time provided.
         currentEndTime = forSingleDayEndTime!;
       }
 
-      // Only add slot if start time is before end time
-      if (currentStartTime.hour < currentEndTime.hour ||
-          (currentStartTime.hour == currentEndTime.hour &&
-              currentStartTime.minute < currentEndTime.minute)) {
+      if (singleDayGeneratedSlots[selectedDay] != null) {
         singleDayGeneratedSlots[selectedDay]!.add({
           'start_time': currentStartTime.format(context),
           'end_time': currentEndTime.format(context),
@@ -236,12 +223,16 @@ class _AudioCallAppointmentSlotsWidgetState
         });
       }
 
+      log("${currentStartTime.format(context)} CurrentStartTime");
+      log("${currentEndTime.format(context)} CurrentEndTime");
+
       currentStartTime = currentEndTime;
     }
 
     setState(() {
       isGenerating = false;
     });
+
     return singleDayGeneratedSlots;
   }
 
@@ -417,46 +408,14 @@ class _AudioCallAppointmentSlotsWidgetState
                                                   gradient:
                                                       AppColors.gradientOne,
                                                 ),
-                                                onSelect:
-                                                    generatedSlots.isNotEmpty
-                                                        ? (values) {
-                                                            if (selectedDays
-                                                                    .contains(
-                                                                        values) ==
-                                                                false) {
-                                                              setState(() {
-                                                                selectedDays =
-                                                                    values;
-                                                              });
-                                                            }
-                                                            setState(() {
-                                                              selectedDays.remove(
-                                                                  selectedDays[
-                                                                      index]);
-                                                            });
-
-                                                            // <== Callback to handle the selected days
-                                                            print(values);
-                                                            log("$selectedDays ONSelect1");
-
-                                                            print(
-                                                                "$selectedDays OnSelectedDays");
-                                                          }
-                                                        : (values) {
-                                                            if (selectedDays
-                                                                    .contains(
-                                                                        values) ==
-                                                                false) {
-                                                              setState(() {
-                                                                selectedDays =
-                                                                    values;
-                                                              });
-                                                            }
-
-                                                            // <== Callback to handle the selected days
-                                                            print(values);
-                                                            log("$selectedDays ONSelect2");
-                                                          },
+                                                onSelect: (values) {
+                                                  setState(() {
+                                                    selectedDays = values;
+                                                  });
+                                                  // <== Callback to handle the selected days
+                                                  print(values);
+                                                  log("$selectedDays ONSelect");
+                                                },
                                               );
                                             },
                                           )
@@ -522,47 +481,47 @@ class _AudioCallAppointmentSlotsWidgetState
                                                               GenerateScheduleSlotsController>()
                                                           .audioCallFeeController,
                                                       onChanged: (value) {
-                                                        final fee =
-                                                            int.tryParse(value);
-                                                        if (fee == null) {
-                                                          setState(() =>
-                                                              totalFee = '');
-                                                          return;
-                                                        }
                                                         if (Get.find<
                                                                     GetAppoinmentCommissionController>()
                                                                 .getAppointmentCommissionModel
                                                                 .data!
                                                                 .commissionType ==
                                                             "fixed_rate") {
-                                                          setState(
-                                                            () {
-                                                              totalFee = fee +
-                                                                  Get.find<
-                                                                          GetAppoinmentCommissionController>()
-                                                                      .getAppointmentCommissionModel
-                                                                      .data!
-                                                                      .rate!;
-                                                            },
-                                                          );
+                                                          setState(() {
+                                                            totalFee = int.parse(Get
+                                                                        .find<
+                                                                            GenerateScheduleSlotsController>()
+                                                                    .audioCallFeeController
+                                                                    .text) +
+                                                                Get.find<
+                                                                        GetAppoinmentCommissionController>()
+                                                                    .getAppointmentCommissionModel
+                                                                    .data!
+                                                                    .rate!;
+                                                          });
                                                         } else if (Get.find<
                                                                     GetAppoinmentCommissionController>()
                                                                 .getAppointmentCommissionModel
                                                                 .data!
                                                                 .commissionType ==
                                                             "percentage") {
-                                                          setState(
-                                                            () {
-                                                              totalFee = fee +
-                                                                  (fee /
-                                                                      100 *
-                                                                      Get.find<
-                                                                              GetAppoinmentCommissionController>()
-                                                                          .getAppointmentCommissionModel
-                                                                          .data!
-                                                                          .rate!);
-                                                            },
-                                                          );
+                                                          setState(() {
+                                                            totalFee = int.parse(Get
+                                                                        .find<
+                                                                            GenerateScheduleSlotsController>()
+                                                                    .audioCallFeeController
+                                                                    .text) +
+                                                                int.parse(Get.find<
+                                                                            GenerateScheduleSlotsController>()
+                                                                        .audioCallFeeController
+                                                                        .text) /
+                                                                    100 *
+                                                                    Get.find<
+                                                                            GetAppoinmentCommissionController>()
+                                                                        .getAppointmentCommissionModel
+                                                                        .data!
+                                                                        .rate!;
+                                                          });
                                                         }
                                                       },
                                                     ),
@@ -770,12 +729,10 @@ class _AudioCallAppointmentSlotsWidgetState
                                                     generateScheduleSlotsController
                                                         .audioCallIntervalController,
                                                 onChanged: (value) {
-                                                  final newInterval =
-                                                      int.tryParse(value);
-                                                  if (newInterval != null) {
-                                                    intervalMinutes =
-                                                        newInterval;
-                                                  }
+                                                  intervalMinutes = int.parse(
+                                                      generateScheduleSlotsController
+                                                          .audioCallIntervalController
+                                                          .text);
                                                   generateScheduleSlotsController
                                                       .update();
                                                 },
@@ -793,25 +750,6 @@ class _AudioCallAppointmentSlotsWidgetState
                                                       .showSnackBar(
                                                           LanguageConstant
                                                               .pleaseSelectDay
-                                                              .tr));
-                                            } else if (startTime == null || //
-                                                endTime == null) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(Get.find<
-                                                          GeneralController>()
-                                                      .showSnackBar(LanguageConstant
-                                                          .pleaseSelectDayStartTimeandEndTime
-                                                          .tr));
-                                            } else if (generateScheduleSlotsController
-                                                .audioCallIntervalController
-                                                .text
-                                                .isEmpty) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(Get.find<
-                                                          GeneralController>()
-                                                      .showSnackBar(
-                                                          LanguageConstant
-                                                              .intervalIsRequired
                                                               .tr));
                                             } else {
                                               generateSlots();
@@ -1067,77 +1005,87 @@ class _AudioCallAppointmentSlotsWidgetState
                                         color: AppColors.primaryColor,
                                       )
                                 : const SizedBox(),
-                            if (generatedSlots.isNotEmpty)
-                              Padding(
-                                padding:
-                                    EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: double.infinity,
-                                        child: ButtonWidgetOne(
-                                          onTap: () {
-                                            if (selectedDays.isNotEmpty &&
-                                                startTime != null &&
-                                                endTime != null) {
-                                              postMethod(
-                                                  context,
-                                                  generateAppointmentScheduleSlotsUrl,
-                                                  {
-                                                    "appointment_type_id": 2,
-                                                    "is_schedule_required": 1,
-                                                    "selected_days":
-                                                        selectedDays,
-                                                    "start_time": startTime!
-                                                        .format(context),
-                                                    "end_time": endTime!
-                                                        .format(context),
-                                                    "fee": generateScheduleSlotsController
-                                                        .audioCallFeeController
-                                                        .text,
-                                                    "interval":
-                                                        generateScheduleSlotsController
-                                                            .audioCallIntervalController
+                            Get.find<GetAppoinmentSchedulesController>()
+                                        .getAppointmentSchedulesModel
+                                        .data ==
+                                    null
+                                ? Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        16.w, 0, 16.w, 16.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: ButtonWidgetOne(
+                                              onTap: () {
+                                                if (selectedDays.isNotEmpty &&
+                                                    startTime != null &&
+                                                    endTime != null) {
+                                                  postMethod(
+                                                      context,
+                                                      generateAppointmentScheduleSlotsUrl,
+                                                      {
+                                                        "appointment_type_id":
+                                                            2,
+                                                        "is_schedule_required":
+                                                            1,
+                                                        "selected_days":
+                                                            selectedDays,
+                                                        "start_time": startTime!
+                                                            .format(context),
+                                                        "end_time": endTime!
+                                                            .format(context),
+                                                        "fee": generateScheduleSlotsController
+                                                            .audioCallFeeController
                                                             .text,
-                                                    "generated_slots":
-                                                        generatedSlots,
-                                                  },
-                                                  true,
-                                                  generateAppointmentScheduleSlotsRepo);
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(Get.find<
-                                                          GeneralController>()
-                                                      .showSnackBar(LanguageConstant
-                                                          .pleaseSelectDayStartTimeandEndTime
-                                                          .tr));
-                                            }
-                                          },
-                                          buttonText: LanguageConstant.save.tr,
-                                          buttonTextStyle:
-                                              AppTextStyles.buttonTextStyle1,
-                                          borderRadius: 10,
+                                                        "interval":
+                                                            generateScheduleSlotsController
+                                                                .audioCallIntervalController
+                                                                .text,
+                                                        "generated_slots":
+                                                            generatedSlots,
+                                                      },
+                                                      true,
+                                                      generateAppointmentScheduleSlotsRepo);
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(Get.find<
+                                                              GeneralController>()
+                                                          .showSnackBar(
+                                                              LanguageConstant
+                                                                  .pleaseSelectDayStartTimeandEndTime
+                                                                  .tr));
+                                                }
+                                              },
+                                              buttonText:
+                                                  LanguageConstant.save.tr,
+                                              buttonTextStyle: AppTextStyles
+                                                  .buttonTextStyle1,
+                                              borderRadius: 10,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 18.w),
-                                    Expanded(
-                                      child: SizedBox(
-                                        width: double.infinity,
-                                        child: ButtonWidgetOne(
-                                          onTap: () {},
-                                          buttonText: LanguageConstant.reset.tr,
-                                          buttonTextStyle:
-                                              AppTextStyles.buttonTextStyle1,
-                                          borderRadius: 10,
+                                        SizedBox(width: 18.w),
+                                        Expanded(
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: ButtonWidgetOne(
+                                              onTap: () {},
+                                              buttonText:
+                                                  LanguageConstant.reset.tr,
+                                              buttonTextStyle: AppTextStyles
+                                                  .buttonTextStyle1,
+                                              borderRadius: 10,
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
+                                  )
+                                : const SizedBox()
                           ],
                         )
                       : addTimeSlotsForSingleDay(),
@@ -1194,44 +1142,44 @@ class _AudioCallAppointmentSlotsWidgetState
                                 Get.find<GenerateScheduleSlotsController>()
                                     .forSingleDayAudioCallFeeController,
                             onChanged: (value) {
-                              final fee = int.tryParse(value);
-                              if (fee == null) {
-                                setState(() => totalFeeForSingleDay = '');
-                                return;
-                              }
                               if (Get.find<GetAppoinmentCommissionController>()
                                       .getAppointmentCommissionModel
                                       .data!
                                       .commissionType ==
                                   "fixed_rate") {
-                                setState(
-                                  () {
-                                    totalFeeForSingleDay = fee +
-                                        Get.find<
-                                                GetAppoinmentCommissionController>()
-                                            .getAppointmentCommissionModel
-                                            .data!
-                                            .rate!;
-                                  },
-                                );
+                                setState(() {
+                                  totalFeeForSingleDay = int.parse(Get.find<
+                                              GenerateScheduleSlotsController>()
+                                          .forSingleDayAudioCallFeeController
+                                          .text) +
+                                      Get.find<
+                                              GetAppoinmentCommissionController>()
+                                          .getAppointmentCommissionModel
+                                          .data!
+                                          .rate!;
+                                });
                               } else if (Get.find<
                                           GetAppoinmentCommissionController>()
                                       .getAppointmentCommissionModel
                                       .data!
                                       .commissionType ==
                                   "percentage") {
-                                setState(
-                                  () {
-                                    totalFeeForSingleDay = fee +
-                                        (fee /
-                                            100 *
-                                            Get.find<
-                                                    GetAppoinmentCommissionController>()
-                                                .getAppointmentCommissionModel
-                                                .data!
-                                                .rate!);
-                                  },
-                                );
+                                setState(() {
+                                  totalFeeForSingleDay = int.parse(Get.find<
+                                              GenerateScheduleSlotsController>()
+                                          .forSingleDayAudioCallFeeController
+                                          .text) +
+                                      int.parse(Get.find<
+                                                  GenerateScheduleSlotsController>()
+                                              .forSingleDayAudioCallFeeController
+                                              .text) /
+                                          100 *
+                                          Get.find<
+                                                  GetAppoinmentCommissionController>()
+                                              .getAppointmentCommissionModel
+                                              .data!
+                                              .rate!;
+                                });
                               }
                             },
                           ),
@@ -1296,12 +1244,12 @@ class _AudioCallAppointmentSlotsWidgetState
                               Get.find<GenerateScheduleSlotsController>()
                                   .forSingleDayAudioCallFeeController,
                           onChanged: (value) {
-                            final fee = int.tryParse(value);
-                            if (fee == null) {
-                              setState(() => totalFeeForSingleDay = '');
-                              return;
-                            }
-                            setState(() => totalFeeForSingleDay = fee);
+                            setState(() {
+                              totalFeeForSingleDay = int.parse(
+                                  Get.find<GenerateScheduleSlotsController>()
+                                      .forSingleDayAudioCallFeeController
+                                      .text);
+                            });
                           },
                         )
                       : const SizedBox(),
@@ -1378,10 +1326,10 @@ class _AudioCallAppointmentSlotsWidgetState
                       controller: Get.find<GenerateScheduleSlotsController>()
                           .forSingleDayAudioCallIntervalController,
                       onChanged: (value) {
-                        final newInterval = int.tryParse(value);
-                        if (newInterval != null) {
-                          intervalMinutes = newInterval;
-                        }
+                        intervalMinutes = int.parse(
+                            Get.find<GenerateScheduleSlotsController>()
+                                .forSingleDayAudioCallIntervalController
+                                .text);
                         Get.find<GenerateScheduleSlotsController>().update();
                       },
                     ),
@@ -1395,19 +1343,10 @@ class _AudioCallAppointmentSlotsWidgetState
           padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 24.h),
           child: ButtonWidgetOne(
             onTap: () {
-              final generalController = Get.find<GeneralController>();
-              if (forSingleDayStartTime == null ||
-                  forSingleDayEndTime == null) {
+              if (selectedDay.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    generalController.showSnackBar(LanguageConstant
-                        .pleaseSelectDayStartTimeandEndTime.tr));
-              } else if (intervalMinutes == null ||
-                  Get.find<GenerateScheduleSlotsController>()
-                      .forSingleDayAudioCallIntervalController
-                      .text
-                      .isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(generalController
-                    .showSnackBar(LanguageConstant.intervalIsRequired.tr));
+                    Get.find<GeneralController>()
+                        .showSnackBar(LanguageConstant.pleaseSelectDay.tr));
               } else {
                 forSingleDayGenerateSlots();
               }
@@ -1421,15 +1360,12 @@ class _AudioCallAppointmentSlotsWidgetState
             ? Wrap(
                 children: [
                   ListView.builder(
-                      itemCount:
-                          singleDayGeneratedSlots.containsKey(selectedDay)
-                              ? 1
-                              : 0,
+                      itemCount: singleDayGeneratedSlots.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        final day = selectedDay;
-                        final slots = singleDayGeneratedSlots[selectedDay];
+                        final day = weekDays.elementAt(index);
+                        final slots = singleDayGeneratedSlots[day];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -1524,7 +1460,6 @@ class _AudioCallAppointmentSlotsWidgetState
                   width: double.infinity,
                   child: ButtonWidgetOne(
                     onTap: () {
-                      log('Save button tapped for single day audio call');
                       if (selectedDay.isNotEmpty &&
                           forSingleDayStartTime != null &&
                           forSingleDayEndTime != null) {
@@ -1532,23 +1467,24 @@ class _AudioCallAppointmentSlotsWidgetState
                             context,
                             generateAppointmentScheduleSlotsForSingleDayUrl,
                             {
-                              'appointment_type_id': 2,
-                              'day': selectedDay,
-                              'start_time':
+                              "appointment_type_id": 2,
+                              "day": selectedDay,
+                              "start_time":
                                   forSingleDayStartTime!.format(context),
-                              'end_time': forSingleDayEndTime!.format(context),
-                              'fee': totalFeeForSingleDay,
-                              'interval':
+                              "end_time": forSingleDayEndTime!.format(context),
+                              "fee": Get.find<GenerateScheduleSlotsController>()
+                                  .forSingleDayAudioCallFeeController
+                                  .text,
+                              "interval":
                                   Get.find<GenerateScheduleSlotsController>()
                                       .forSingleDayAudioCallIntervalController
                                       .text,
-                              'generated_slots': singleDayGeneratedSlots,
+                              "generated_slots": singleDayGeneratedSlots,
                             },
                             true,
                             generateAppointmentScheduleSlotsForSingleDayRepo);
                         Get.offNamed(PageRoutes.scheduleAppSlots);
                       } else {
-                        log('Save button validation failed: Not all fields are filled.');
                         ScaffoldMessenger.of(context).showSnackBar(
                             Get.find<GeneralController>().showSnackBar(
                                 LanguageConstant
@@ -1567,7 +1503,6 @@ class _AudioCallAppointmentSlotsWidgetState
                   width: double.infinity,
                   child: ButtonWidgetOne(
                     onTap: () {
-                      log('Reset button tapped for single day audio call');
                       setState(() {
                         isSingleDayOn = false;
                       });

@@ -80,9 +80,10 @@ class _State extends State<JoinChannelAudio> {
 
   @override
   void dispose() {
-    _timer!.cancel();
-    super.dispose();
+    _timer?.cancel();
+    // release the engine without awaiting because dispose cannot be async
     _engine.release();
+    super.dispose();
   }
 
   int? callEnd = 0;
@@ -90,6 +91,7 @@ class _State extends State<JoinChannelAudio> {
   Future<void> _initEngine() async {
     _engine = createAgoraRtcEngine();
     await _engine.initialize(RtcEngineContext(appId: config.agoraAppId));
+
     _addListeners();
 
     await _engine.enableAudio();
@@ -99,37 +101,33 @@ class _State extends State<JoinChannelAudio> {
   }
 
   void _addListeners() {
-    _engine.registerEventHandler(RtcEngineEventHandler(
-      onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-        setState(() {
-          isJoined = true;
-        });
-      },
-      onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-        setState(() {
-          this.remoteUid = remoteUid;
-          callEnd = 1;
-        });
-      },
-      onUserOffline: (RtcConnection connection, int remoteUid,
-          UserOfflineReasonType reason) {
-        setState(() {
-          this.remoteUid = remoteUid;
-          if (callEnd == 1) {
+    _engine.registerEventHandler(
+      RtcEngineEventHandler(
+        onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
+          setState(() {
+            isJoined = true;
+          });
+        },
+        onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
+          setState(() {
+            this.remoteUid = remoteUid;
+            callEnd = 1;
+          });
+        },
+        onUserOffline: (RtcConnection connection, int remoteUid,
+            UserOfflineReasonType reason) {
+          setState(() {
             callEnd = 2;
-          }
-        });
-        // if (remoteUid.isEmpty) {}
-      },
-      onLeaveChannel: (RtcConnection connection, RtcStats stats) {
-        _leaveChannel();
-        setState(() {
-          isJoined = false;
-          remoteUid = null;
-          // remoteUid.clear();
-        });
-      },
-    ));
+          });
+        },
+        onLeaveChannel: (RtcConnection connection, RtcStats stats) {
+          setState(() {
+            isJoined = false;
+            remoteUid = null;
+          });
+        },
+      ),
+    );
   }
 
   // _addListeners() {
@@ -166,10 +164,14 @@ class _State extends State<JoinChannelAudio> {
 
     await _engine
         .joinChannel(
-          token: Get.find<GeneralController>().tokenForCall!,
+          token: Get.find<GeneralController>().tokenForCall ?? '',
           channelId: Get.find<GeneralController>().channelForCall!,
-          uid: Get.find<GeneralController>().callerType,
-          options: const ChannelMediaOptions(),
+          uid: 0,
+          options: ChannelMediaOptions(
+            clientRoleType: Get.find<GeneralController>().callerType == 1
+                ? ClientRoleType.clientRoleBroadcaster
+                : ClientRoleType.clientRoleAudience,
+          ),
         )
         .catchError((onError) {});
   }

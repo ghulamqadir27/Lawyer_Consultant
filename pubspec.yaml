@@ -52,7 +52,6 @@ dependencies:
   firebase_core: 
   firebase_auth: 
   weekday_selector: ^1.1.0
-  # image_picker_gallery_camera: ^0.2.2
   image_picker: ^1.2.0
   crypto: ^3.0.0
   pusher_channels_flutter: ^2.4.0

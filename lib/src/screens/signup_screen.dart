@@ -271,7 +271,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               buttonText: LanguageConstant.signInViaGoogle.tr,
                               iconHeight: 25.h,
                               onTap: () {
-                                Get.find<SigninController>().signInWithGoogle();
+                                // Get.find<SigninController>().signInWithGoogle();
                               },
                             ),
                             SizedBox(height: 14.h),

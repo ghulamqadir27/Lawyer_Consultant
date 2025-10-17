@@ -305,106 +305,93 @@ class _AppointmentHistoryScreenState extends State<AppointmentHistoryScreen> {
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .spaceAround,
+                                                            .spaceBetween,
                                                     children: [
-                                                      Expanded(
-                                                        child: Row(
-                                                          children: [
-                                                            Image.asset(
-                                                              "assets/icons/Date_range_light.png",
-                                                              color: AppColors
-                                                                  .white,
-                                                            ),
-                                                            SizedBox(
-                                                                width: 5.w),
-                                                            Flexible(
-                                                              child: Text(
-                                                                // "Mon, 28th March, 2023",
-                                                                lawyerAppointmentHistoryController
-                                                                    .lawyerAllAppointmentHistoryListForPagination[
-                                                                        index]
-                                                                    .date!,
-                                                                style: AppTextStyles
-                                                                    .bodyTextStyle6,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Row(
-                                                          children: [
-                                                            Image.asset(
-                                                              "assets/icons/Time.png",
-                                                              color: AppColors
-                                                                  .white,
-                                                            ),
-                                                            SizedBox(
-                                                                width: 5.w),
-                                                            Flexible(
-                                                              child: Text(
-                                                                "${lawyerAppointmentHistoryController.lawyerAllAppointmentHistoryListForPagination[index].startTime}",
-                                                                style: AppTextStyles
-                                                                    .bodyTextStyle6,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Row(
-                                                          children: [
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/icons/Date_range_light.png",
+                                                            color:
+                                                                AppColors.white,
+                                                          ),
+                                                          SizedBox(width: 5.w),
+                                                          Text(
+                                                            // "Mon, 28th March, 2023",
                                                             lawyerAppointmentHistoryController
-                                                                        .lawyerAllAppointmentHistoryListForPagination[
-                                                                            index]
-                                                                        .appointmentTypeId! ==
-                                                                    1
-                                                                ? Image.asset(
-                                                                    "assets/icons/🦆 icon _Video_.png",
-                                                                    height:
-                                                                        16.h,
-                                                                    color: AppColors
-                                                                        .white,
-                                                                  )
-                                                                : lawyerAppointmentHistoryController
-                                                                            .lawyerAllAppointmentHistoryListForPagination[
-                                                                                index]
-                                                                            .appointmentTypeId! ==
-                                                                        2
-                                                                    ? Image
-                                                                        .asset(
-                                                                        "assets/icons/🦆 icon _Volume Up_.png",
-                                                                        height:
-                                                                            16.h,
-                                                                        color: AppColors
-                                                                            .white,
-                                                                      )
-                                                                    : lawyerAppointmentHistoryController.lawyerAllAppointmentHistoryListForPagination[index].appointmentTypeId! ==
-                                                                            3
-                                                                        ? Image
-                                                                            .asset(
-                                                                            "assets/icons/🦆 icon _comments_.png",
-                                                                            height:
-                                                                                16.h,
-                                                                            color:
-                                                                                AppColors.white,
-                                                                          )
-                                                                        : Container(),
-                                                            SizedBox(
-                                                                width: 5.w),
-                                                            Flexible(
-                                                              child: Text(
-                                                                // "Video Call",
-                                                                lawyerAppointmentHistoryController
-                                                                    .lawyerAllAppointmentHistoryListForPagination[
-                                                                        index]
-                                                                    .appointmentTypeName!,
-                                                                style: AppTextStyles
-                                                                    .bodyTextStyle6,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                                .lawyerAllAppointmentHistoryListForPagination[
+                                                                    index]
+                                                                .date!,
+                                                            style: AppTextStyles
+                                                                .bodyTextStyle6,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image.asset(
+                                                            "assets/icons/Time.png",
+                                                            color:
+                                                                AppColors.white,
+                                                          ),
+                                                          SizedBox(width: 5.w),
+                                                          Text(
+                                                            "${lawyerAppointmentHistoryController.lawyerAllAppointmentHistoryListForPagination[index].startTime}",
+                                                            style: AppTextStyles
+                                                                .bodyTextStyle6,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          lawyerAppointmentHistoryController
+                                                                      .lawyerAllAppointmentHistoryListForPagination[
+                                                                          index]
+                                                                      .appointmentTypeId! ==
+                                                                  1
+                                                              ? Image.asset(
+                                                                  "assets/icons/🦆 icon _Video_.png",
+                                                                  height: 16.h,
+                                                                  color:
+                                                                      AppColors
+                                                                          .white,
+                                                                )
+                                                              : lawyerAppointmentHistoryController
+                                                                          .lawyerAllAppointmentHistoryListForPagination[
+                                                                              index]
+                                                                          .appointmentTypeId! ==
+                                                                      2
+                                                                  ? Image.asset(
+                                                                      "assets/icons/🦆 icon _Volume Up_.png",
+                                                                      height:
+                                                                          16.h,
+                                                                      color: AppColors
+                                                                          .white,
+                                                                    )
+                                                                  : lawyerAppointmentHistoryController
+                                                                              .lawyerAllAppointmentHistoryListForPagination[
+                                                                                  index]
+                                                                              .appointmentTypeId! ==
+                                                                          3
+                                                                      ? Image
+                                                                          .asset(
+                                                                          "assets/icons/🦆 icon _comments_.png",
+                                                                          height:
+                                                                              16.h,
+                                                                          color:
+                                                                              AppColors.white,
+                                                                        )
+                                                                      : Container(),
+                                                          SizedBox(width: 5.w),
+                                                          Text(
+                                                            // "Video Call",
+                                                            lawyerAppointmentHistoryController
+                                                                .lawyerAllAppointmentHistoryListForPagination[
+                                                                    index]
+                                                                .appointmentTypeName!,
+                                                            style: AppTextStyles
+                                                                .bodyTextStyle6,
+                                                          ),
+                                                        ],
                                                       )
                                                     ],
                                                   ),
@@ -645,110 +632,96 @@ class _AppointmentHistoryScreenState extends State<AppointmentHistoryScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/icons/Date_range_light.png",
-                                    color: AppColors.white,
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  Flexible(
-                                    child: Text(
-                                      // "Mon, 28th March, 2023",
-                                      lawyerAppointmentHistoryController
-                                          .lawyerAllAppointmentHistoryListForPagination
-                                          .where((i) =>
-                                              i.appointmentStatusCode ==
-                                              statusCode)
-                                          .toList()[index]
-                                          .date!,
-                                      style: AppTextStyles.bodyTextStyle6,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    "assets/icons/Time.png",
-                                    color: AppColors.white,
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  Flexible(
-                                    child: Text(
-                                      lawyerAppointmentHistoryController
-                                              .lawyerAllAppointmentHistoryListForPagination[
-                                                  index]
-                                              .startTime ??
-                                          "",
-                                      style: AppTextStyles.bodyTextStyle6,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Row(
-                                children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/icons/Date_range_light.png",
+                                  color: AppColors.white,
+                                ),
+                                SizedBox(width: 5.w),
+                                Text(
+                                  // "Mon, 28th March, 2023",
                                   lawyerAppointmentHistoryController
-                                              .lawyerAllAppointmentHistoryListForPagination
-                                              .where((i) =>
-                                                  i.appointmentStatusCode ==
-                                                  statusCode)
-                                              .toList()[index]
-                                              .appointmentTypeId! ==
-                                          1
-                                      ? Image.asset(
-                                          "assets/icons/🦆 icon _Video_.png",
-                                          height: 16.h,
-                                          color: AppColors.white,
-                                        )
-                                      : lawyerAppointmentHistoryController
-                                                  .lawyerAllAppointmentHistoryListForPagination
-                                                  .where((i) =>
-                                                      i.appointmentStatusCode ==
-                                                      statusCode)
-                                                  .toList()[index]
-                                                  .appointmentTypeId! ==
-                                              2
-                                          ? Image.asset(
-                                              "assets/icons/🦆 icon _Volume Up_.png",
-                                              height: 16.h,
-                                              color: AppColors.white,
-                                            )
-                                          : lawyerAppointmentHistoryController
-                                                      .lawyerAllAppointmentHistoryListForPagination
-                                                      .where((i) =>
-                                                          i.appointmentStatusCode ==
-                                                          statusCode)
-                                                      .toList()[index]
-                                                      .appointmentTypeId! ==
-                                                  3
-                                              ? Image.asset(
-                                                  "assets/icons/🦆 icon _comments_.png",
-                                                  height: 16.h,
-                                                  color: AppColors.white,
-                                                )
-                                              : Container(),
-                                  SizedBox(width: 5.w),
-                                  Flexible(
-                                    child: Text(
-                                      // "Video Call",
-                                      lawyerAppointmentHistoryController
-                                          .lawyerAllAppointmentHistoryListForPagination
-                                          .where((i) =>
-                                              i.appointmentStatusCode ==
-                                              statusCode)
-                                          .toList()[index]
-                                          .appointmentTypeName!,
-                                      style: AppTextStyles.bodyTextStyle6,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                      .lawyerAllAppointmentHistoryListForPagination
+                                      .where((i) =>
+                                          i.appointmentStatusCode == statusCode)
+                                      .toList()[index]
+                                      .date!,
+                                  style: AppTextStyles.bodyTextStyle6,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/icons/Time.png",
+                                  color: AppColors.white,
+                                ),
+                                SizedBox(width: 5.w),
+                                Text(
+                                  lawyerAppointmentHistoryController
+                                          .lawyerAllAppointmentHistoryListForPagination[
+                                              index]
+                                          .startTime ??
+                                      "",
+                                  style: AppTextStyles.bodyTextStyle6,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                lawyerAppointmentHistoryController
+                                            .lawyerAllAppointmentHistoryListForPagination
+                                            .where((i) =>
+                                                i.appointmentStatusCode ==
+                                                statusCode)
+                                            .toList()[index]
+                                            .appointmentTypeId! ==
+                                        1
+                                    ? Image.asset(
+                                        "assets/icons/🦆 icon _Video_.png",
+                                        height: 16.h,
+                                        color: AppColors.white,
+                                      )
+                                    : lawyerAppointmentHistoryController
+                                                .lawyerAllAppointmentHistoryListForPagination
+                                                .where((i) =>
+                                                    i.appointmentStatusCode ==
+                                                    statusCode)
+                                                .toList()[index]
+                                                .appointmentTypeId! ==
+                                            2
+                                        ? Image.asset(
+                                            "assets/icons/🦆 icon _Volume Up_.png",
+                                            height: 16.h,
+                                            color: AppColors.white,
+                                          )
+                                        : lawyerAppointmentHistoryController
+                                                    .lawyerAllAppointmentHistoryListForPagination
+                                                    .where((i) =>
+                                                        i.appointmentStatusCode ==
+                                                        statusCode)
+                                                    .toList()[index]
+                                                    .appointmentTypeId! ==
+                                                3
+                                            ? Image.asset(
+                                                "assets/icons/🦆 icon _comments_.png",
+                                                height: 16.h,
+                                                color: AppColors.white,
+                                              )
+                                            : Container(),
+                                SizedBox(width: 5.w),
+                                Text(
+                                  // "Video Call",
+                                  lawyerAppointmentHistoryController
+                                      .lawyerAllAppointmentHistoryListForPagination
+                                      .where((i) =>
+                                          i.appointmentStatusCode == statusCode)
+                                      .toList()[index]
+                                      .appointmentTypeName!,
+                                  style: AppTextStyles.bodyTextStyle6,
+                                ),
+                              ],
                             )
                           ],
                         ),

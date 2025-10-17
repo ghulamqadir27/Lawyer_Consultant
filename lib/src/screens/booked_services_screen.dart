@@ -325,50 +325,43 @@ class _BookedServicesScreenState extends State<BookedServicesScreen> {
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceAround,
+                                                          .spaceBetween,
                                                   children: [
-                                                    Expanded(
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            "assets/icons/Date_range_light.png",
-                                                            color:
-                                                                AppColors.white,
-                                                          ),
-                                                          SizedBox(width: 5.w),
-                                                          Text(
-                                                            // "Mon, 28th March, 2023",
-                                                            lawyerBookedServicesController
-                                                                .lawyerAllBookedServicesListForPagination[
-                                                                    index]
-                                                                .date!,
-                                                            style: AppTextStyles
-                                                                .bodyTextStyle6,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                    Row(
+                                                      children: [
+                                                        Image.asset(
+                                                          "assets/icons/Date_range_light.png",
+                                                          color:
+                                                              AppColors.black,
+                                                        ),
+                                                        SizedBox(width: 5.w),
+                                                        Text(
+                                                          // "Mon, 28th March, 2023",
+                                                          lawyerBookedServicesController
+                                                              .lawyerAllBookedServicesListForPagination[
+                                                                  index]
+                                                              .date!,
+                                                          style: AppTextStyles
+                                                              .bodyTextStyle6,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Expanded(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Image.asset(
-                                                            "assets/icons/🦆 icon _comments_.png",
-                                                            height: 16.h,
-                                                            color:
-                                                                AppColors.white,
-                                                          ),
-                                                          SizedBox(width: 5.w),
-                                                          Text(
-                                                            LanguageConstant
-                                                                .service.tr,
-                                                            style: AppTextStyles
-                                                                .bodyTextStyle6,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                    Row(
+                                                      children: [
+                                                        Image.asset(
+                                                          "assets/icons/🦆 icon _comments_.png",
+                                                          height: 16.h,
+                                                          color:
+                                                              AppColors.black,
+                                                        ),
+                                                        SizedBox(width: 5.w),
+                                                        Text(
+                                                          LanguageConstant
+                                                              .service.tr,
+                                                          style: AppTextStyles
+                                                              .bodyTextStyle6,
+                                                        ),
+                                                      ],
                                                     )
                                                   ],
                                                 ),
@@ -616,43 +609,38 @@ class _BookedServicesScreenState extends State<BookedServicesScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  "assets/icons/Date_range_light.png",
-                                  color: AppColors.white,
-                                ),
-                                SizedBox(width: 5.w),
-                                Text(
-                                  // "Mon, 28th March, 2023",
-                                  lawyerBookedServicesController
-                                      .lawyerAllBookedServicesListForPagination
-                                      .where((i) =>
-                                          i.serviceStatusCode == statusCode)
-                                      .toList()[index]
-                                      .date!,
-                                  style: AppTextStyles.bodyTextStyle6,
-                                ),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/icons/Date_range_light.png",
+                                color: AppColors.black,
+                              ),
+                              SizedBox(width: 5.w),
+                              Text(
+                                // "Mon, 28th March, 2023",
+                                lawyerBookedServicesController
+                                    .lawyerAllBookedServicesListForPagination
+                                    .where((i) =>
+                                        i.serviceStatusCode == statusCode)
+                                    .toList()[index]
+                                    .date!,
+                                style: AppTextStyles.bodyTextStyle6,
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/icons/🦆 icon _comments_.png",
-                                  color: AppColors.white,
-                                  height: 16.h,
-                                ),
-                                SizedBox(width: 5.w),
-                                Text(
-                                  LanguageConstant.service.tr,
-                                  style: AppTextStyles.bodyTextStyle6,
-                                ),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/icons/🦆 icon _comments_.png",
+                                color: AppColors.black,
+                                height: 16.h,
+                              ),
+                              SizedBox(width: 5.w),
+                              Text(
+                                LanguageConstant.service.tr,
+                                style: AppTextStyles.bodyTextStyle6,
+                              ),
+                            ],
                           )
                         ],
                       ),

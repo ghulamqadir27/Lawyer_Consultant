@@ -101,37 +101,37 @@ class _State extends State<JoinChannelVideo> {
   }
 
   void _addListeners() {
-    _engine.registerEventHandler(RtcEngineEventHandler(
-      onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-        setState(() {
-          isJoined = true;
-        });
-      },
-      onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-        setState(() {
-          this.remoteUid = remoteUid;
-          callEnd = 1;
-        });
-      },
-      onUserOffline: (RtcConnection connection, int remoteUid,
-          UserOfflineReasonType reason) {
-        setState(() {
-          this.remoteUid = remoteUid;
-          if (callEnd == 1) {
-            callEnd = 2;
-          }
-        });
-        // if (remoteUid.isEmpty) {}
-      },
-      onLeaveChannel: (RtcConnection connection, RtcStats stats) {
-        _leaveChannel();
-        setState(() {
-          isJoined = false;
-          remoteUid = null;
-          // remoteUid.clear();
-        });
-      },
-    ));
+    _engine.registerEventHandler(
+      RtcEngineEventHandler(
+        onJoinChannelSuccess: (RtcConnection connection, int uid) {
+          setState(() {
+            isJoined = true;
+          });
+        },
+        onUserJoined: (RtcConnection connection, int uid, int elapsed) {
+          setState(() {
+            remoteUid = uid;
+            callEnd = 1;
+          });
+        },
+        onUserOffline:
+            (RtcConnection connection, int uid, UserOfflineReasonType reason) {
+          setState(() {
+            remoteUid = uid;
+            if (callEnd == 1) {
+              callEnd = 2;
+            }
+          });
+        },
+        onLeaveChannel: (RtcConnection connection, RtcStats stats) {
+          _leaveChannel();
+          setState(() {
+            isJoined = false;
+            remoteUid = null;
+          });
+        },
+      ),
+    );
   }
 
   Future<dynamic> _joinChannel() async {
@@ -139,12 +139,15 @@ class _State extends State<JoinChannelVideo> {
       await [Permission.microphone, Permission.camera].request();
     }
     await _engine.joinChannel(
-      token: Get.find<GeneralController>().tokenForCall!,
+      token: Get.find<GeneralController>().tokenForCall ?? '',
       channelId: Get.find<GeneralController>().channelForCall!,
-      uid: Get.find<GeneralController>().callerType,
-      options: const ChannelMediaOptions(),
+      uid: 0,
+      options: ChannelMediaOptions(
+        clientRoleType: Get.find<GeneralController>().callerType == 1
+            ? ClientRoleType.clientRoleBroadcaster
+            : ClientRoleType.clientRoleAudience,
+      ),
     );
-    _addListeners();
   }
 
   Future<void> _leaveChannel() async {
@@ -233,66 +236,26 @@ class _State extends State<JoinChannelVideo> {
     return SafeArea(
       child: Stack(
         children: [
-          remoteUid == 0
-              ? const SizedBox()
-              : remoteUid == null
-                  ? const Center(child: CircularProgressIndicator())
-                  : AgoraVideoView(
-                      controller: VideoViewController.remote(
-                        rtcEngine: _engine,
-                        canvas: VideoCanvas(uid: remoteUid),
-                        connection: RtcConnection(
-                            channelId:
-                                Get.find<GeneralController>().channelForCall!),
-                      ),
-                    ),
-          SizedBox(
-            width: 120,
-            height: 120,
-            child: AgoraVideoView(
-              controller: VideoViewController(
-                  rtcEngine: _engine, canvas: VideoCanvas(uid: 0)),
+          if (remoteUid != null)
+            AgoraVideoView(
+              controller: VideoViewController.remote(
+                rtcEngine: _engine,
+                canvas: VideoCanvas(uid: remoteUid),
+                connection: RtcConnection(
+                  channelId: Get.find<GeneralController>().channelForCall!,
+                ),
+              ),
             ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: SizedBox(
+                width: 120,
+                height: 160,
+                child: AgoraVideoView(
+                    controller: VideoViewController(
+                        rtcEngine: _engine, canvas: VideoCanvas(uid: 0)))),
           ),
           _toolbar(),
-          // remoteUid.isEmpty
-          // ?
-          //  SizedBox(),
-          // SizedBox(
-          //     width: 120,
-          //     height: 120,
-          //     child: (RtcRemoteView.SurfaceView(
-          //       channelId: Get.find<GeneralController>().channelForCall!,
-          //       uid: remoteUid,
-          //     ))),
-          // Align(
-          //   alignment: Alignment.topLeft,
-          //   child: SizedBox(
-          //     width: 100,
-          //     height: 150,
-          //     child: Center(
-          //         child: localUserJoined
-          //             ? AgoraVideoView(
-          //                 controller: VideoViewController(
-          //                   // useAndroidSurfaceView: true,
-          //                   rtcEngine: _engine,
-          //                   canvas: VideoCanvas(uid: remoteUid),
-          //                 ),
-          //               )
-          //             : CircularProgressIndicator()),
-          //   ),
-          // ),
-          // : rtc_remote_view.SurfaceView(
-          //     channelId:
-          //         Get.find<GeneralController>().channelForCall!,
-          //     uid: remoteUid[0],
-          //   ),
-          // SizedBox(
-          //   width: 120,
-          //   height: 120,
-          //   child: RtcLocalView.SurfaceView(),
-          // ),
-          _toolbar()
         ],
       ),
     );

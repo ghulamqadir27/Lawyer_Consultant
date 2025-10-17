@@ -798,20 +798,20 @@ class LawyerProfileScreenState extends State<LawyerProfileScreen>
                       Get.find<EditProfileController>().profileImagesList = [];
                     });
                     final XFile? image = await ImagePicker().pickImage(
-                      source: ImageSource.camera,
-                      imageQuality: 10,
-                      maxWidth: 400,
-                      maxHeight: 600,
-                    );
-                    if (image != null) {
-                      Get.find<EditProfileController>()
-                          .profileImagesList
-                          .add(image);
-                      setState(() {
-                        Get.find<EditProfileController>().profileImage =
-                            File(image.path);
-                      });
-                    }
+                        source: ImageSource.camera,
+                        imageQuality: 10,
+                        maxWidth: 400,
+                        maxHeight: 600);
+                    if (image == null) return;
+                    Get.find<EditProfileController>()
+                        .profileImagesList
+                        .add(image);
+                    setState(() {
+                      Get.find<EditProfileController>().profileImage = File(
+                          Get.find<EditProfileController>()
+                              .profileImagesList[0]
+                              .path);
+                    });
                   },
                   child: Text(
                     'Camera',
@@ -825,20 +825,20 @@ class LawyerProfileScreenState extends State<LawyerProfileScreen>
                       Get.find<EditProfileController>().profileImagesList = [];
                     });
                     final XFile? image = await ImagePicker().pickImage(
-                      source: ImageSource.gallery,
-                      imageQuality: 10,
-                      maxWidth: 400,
-                      maxHeight: 600,
-                    );
-                    if (image != null) {
-                      Get.find<EditProfileController>()
-                          .profileImagesList
-                          .add(image);
-                      setState(() {
-                        Get.find<EditProfileController>().profileImage =
-                            File(image.path);
-                      });
-                    }
+                        source: ImageSource.gallery,
+                        imageQuality: 10,
+                        maxWidth: 400,
+                        maxHeight: 600);
+                    if (image == null) return;
+                    Get.find<EditProfileController>()
+                        .profileImagesList
+                        .add(image);
+                    setState(() {
+                      Get.find<EditProfileController>().profileImage = File(
+                          Get.find<EditProfileController>()
+                              .profileImagesList[0]
+                              .path);
+                    });
                   },
                   child: Text(
                     'Gallery',
@@ -1192,16 +1192,12 @@ class _LawyerCertificateWidgetState extends State<LawyerCertificateWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Flexible(
-                                        child: Text(
-                                            editProfileController
-                                                .lawyerProfileCertificateForPagination[
-                                                    index]
-                                                .name!,
-                                            style:
-                                                AppTextStyles.bodyTextStyle11,
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
+                                      Text(
+                                          editProfileController
+                                              .lawyerProfileCertificateForPagination[
+                                                  index]
+                                              .name!,
+                                          style: AppTextStyles.bodyTextStyle11),
                                       Text(LanguageConstant.download.tr,
                                           style: AppTextStyles.bodyTextStyle11),
                                       Row(
@@ -1675,16 +1671,12 @@ class _LawyerExperienceWidgetState extends State<LawyerExperienceWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Flexible(
-                                        child: Text(
-                                            editProfileController
-                                                .lawyerProfileExperienceForPagination[
-                                                    index]
-                                                .company!,
-                                            style:
-                                                AppTextStyles.bodyTextStyle11,
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
+                                      Text(
+                                          editProfileController
+                                              .lawyerProfileExperienceForPagination[
+                                                  index]
+                                              .company!,
+                                          style: AppTextStyles.bodyTextStyle11),
                                       Text(LanguageConstant.download.tr,
                                           style: AppTextStyles.bodyTextStyle11),
                                       Row(
@@ -2236,16 +2228,12 @@ class _LawyerEducationWidgetState extends State<LawyerEducationWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Flexible(
-                                        child: Text(
-                                            editProfileController
-                                                .lawyerProfileEducationForPagination[
-                                                    index]
-                                                .institute!,
-                                            style:
-                                                AppTextStyles.bodyTextStyle11,
-                                            overflow: TextOverflow.ellipsis),
-                                      ),
+                                      Text(
+                                          editProfileController
+                                              .lawyerProfileEducationForPagination[
+                                                  index]
+                                              .institute!,
+                                          style: AppTextStyles.bodyTextStyle11),
                                       Text(LanguageConstant.download.tr,
                                           style: AppTextStyles.bodyTextStyle11),
                                       Row(
@@ -3461,15 +3449,14 @@ class _LawyerServicesWidgetState extends State<LawyerServicesWidget> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Flexible(
+                                      Expanded(
                                         child: Text(
                                             editProfileController
                                                 .lawyerProfileServiceForPagination[
                                                     index]
                                                 .name!,
                                             style:
-                                                AppTextStyles.bodyTextStyle11,
-                                            overflow: TextOverflow.ellipsis),
+                                                AppTextStyles.bodyTextStyle11),
                                       ),
                                       SizedBox(width: 16.w),
                                       Text(LanguageConstant.download.tr,

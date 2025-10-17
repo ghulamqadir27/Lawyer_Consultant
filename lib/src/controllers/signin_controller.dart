@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+// import 'package:google_sign_in/google_sign_in.dart'; // Commented out to avoid error
 
 import '../api_services/post_service.dart';
 import '../api_services/urls.dart';
@@ -16,7 +17,7 @@ class SigninController extends GetxController {
   String? passwordValidator;
 
   GetSignInUserModel signInUserModel =
-      GetSignInUserModel(); //  for saving login-data
+      GetSignInUserModel(); // for saving login-data
 
   final GlobalKey<FormState> _loginFromKey = GlobalKey();
   GlobalKey<FormState> get loginFromKey => _loginFromKey;
@@ -42,7 +43,6 @@ class SigninController extends GetxController {
               'first_name': userData["first_name"],
               'last_name': userData["last_name"],
               'login_as': "lawyer",
-              // 'id': userData["id"],
             },
             false,
             socialSignInWithEmailRepo);
@@ -54,40 +54,42 @@ class SigninController extends GetxController {
     }
   }
 
-  /// Signin with Google
+  /*
+  /// Signin with Google (Commented out to avoid build error)
   Future<void> signInWithGoogle() async {
-    // try {
-    //   final GoogleSignInAccount? googleSignInAccount =
-    //       await GoogleSignIn().signIn();
-    //
-    //   final GoogleSignInAuthentication? googleSignInAuthentication =
-    //       await googleSignInAccount?.authentication;
-    //   if (googleSignInAuthentication?.accessToken == null) {
-    //     return;
-    //   }
-    //
-    //   final AuthCredential credential = GoogleAuthProvider.credential(
-    //     accessToken: googleSignInAuthentication?.accessToken,
-    //     idToken: googleSignInAuthentication?.idToken,
-    //   );
-    //
-    //   final UserCredential authResult =
-    //       await FirebaseAuth.instance.signInWithCredential(credential);
-    //   final user = authResult.user;
-    //
-    //   postMethod(
-    //       Get.context!,
-    //       socialLoginURL,
-    //       {
-    //         'email': user!.email,
-    //         'first_name': user.displayName,
-    //         'last_name': user.displayName,
-    //         'login_as': "lawyer",
-    //       },
-    //       false,
-    //       socialSignInWithEmailRepo);
-    // } catch (e) {
-    //   print('Google Login Error: $e');
-    // }
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleSignInAuthentication =
+          googleSignInAccount?.authentication;
+      if (googleSignInAuthentication?.accessToken == null) {
+        return;
+      }
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication?.accessToken,
+        idToken: googleSignInAuthentication?.idToken,
+      );
+
+      final UserCredential authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      final user = authResult.user;
+
+      postMethod(
+          Get.context!,
+          socialLoginURL,
+          {
+            'email': user!.email,
+            'first_name': user.displayName,
+            'last_name': user.displayName,
+            'login_as': "lawyer",
+          },
+          false,
+          socialSignInWithEmailRepo);
+    } catch (e) {
+      print('Google Login Error: $e');
+    }
   }
+  */
 }

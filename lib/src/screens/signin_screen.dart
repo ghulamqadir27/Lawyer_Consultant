@@ -192,7 +192,7 @@ class _SigninScreenState extends State<SigninScreen> {
                           buttonText: LanguageConstant.signInViaGoogle.tr,
                           iconHeight: 25.h,
                           onTap: () {
-                            signInController.signInWithGoogle();
+                            // signInController.signInWithGoogle();
                           },
                         ),
                         SizedBox(height: 14.h),

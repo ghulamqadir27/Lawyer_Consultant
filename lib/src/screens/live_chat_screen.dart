@@ -63,7 +63,7 @@ class _LiveChatScreenState extends State<LiveChatScreen> {
         onConnectionStateChange: onConnectionStateChange,
         onError: onError,
         onSubscriptionSucceeded: onSubscriptionSucceeded,
-        onEvent: onEvent, // ✅ FIXED
+        onEvent: onEvent,
         onSubscriptionError: onSubscriptionError,
         onDecryptionFailure: onDecryptionFailure,
         onMemberAdded: onMemberAdded,
